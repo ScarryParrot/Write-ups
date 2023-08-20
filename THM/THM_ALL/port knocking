@@ -1,0 +1,5 @@
+port knocking
+
+knock ip 1111 2222 .. (i mean key)
+
+then run nmap ..to find new ports
