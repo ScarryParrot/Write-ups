@@ -1,0 +1,7 @@
+compile gcc file
+
+i686-w64-mingw32-gcc 40564.c -o 40564.exe -lws2_32
+
+if gcc not there check for cc
+
+which cc
