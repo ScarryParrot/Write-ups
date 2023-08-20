@@ -1,0 +1,7 @@
+1.using gobuster found login page
+
+2.take it on burp .. it make request to /api/request/search
+
+3. we found /api .. now enumerate on it
+
+4.found /api/users with md5 hash of password
