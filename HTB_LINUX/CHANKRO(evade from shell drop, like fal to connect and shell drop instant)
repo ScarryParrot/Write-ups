@@ -1,0 +1,9 @@
+`TryHackMe Bypass Disable Functions Walkthrough`
+
+we tried all but cant get shell ..
+
+the close we get by doing ==head of png into php== which connects to us but dies instantly
+
+we found phpinfo.php it was blank at first then after we uplaoded our normal shell it gave us the ==DOCUMENT_ROOT== absolute path
+
+so now we used ==CHankro .py t==o spawn us php file and we uplaoded it using GIF89a on top and it gave us shell
