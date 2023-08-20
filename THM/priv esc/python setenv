@@ -1,0 +1,5 @@
+python setenv
+
+sudo ==**PYTHONPATH=/tmp/**== /usr/bin/python3 /opt/development/test_module.py
+
+if pythonpath is set as it dont hold values
