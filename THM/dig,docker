@@ -1,0 +1,13 @@
+dig @ip -x ip
+
+we got domain
+
+then martial exploit we got shell
+
+now we saw established root shell on docker
+
+we got in as root .. dwld dokcer from main machine to docker
+
+then do steps ..
+
+Dosker -sirol PG
