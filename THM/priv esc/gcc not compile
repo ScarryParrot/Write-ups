@@ -1,0 +1,5 @@
+gcc not compile
+
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+gcc 37292.c -o exploit && ./exploit
