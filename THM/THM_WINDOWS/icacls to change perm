@@ -1,0 +1,3 @@
+icacls to change perm
+
+icacls root.txt /grant Alfred:F
