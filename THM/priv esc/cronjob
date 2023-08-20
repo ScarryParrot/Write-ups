@@ -1,0 +1,7 @@
+cronjob
+
+if script is there just put a payload file with #!/bin/bash rm,..... and chmod it
+
+can make a file in tmp with payload and
+
+echo "ddd;/tmp/shell.sh" >> .quotes  it in crontab
