@@ -1,0 +1,37 @@
+we used ==rpcc== to get usernames
+
+but crackmapexec and other tools could not verigfy as we dont haev the password
+
+so out of options we did ldap search and got some more info
+
+==ldapsearch== -H ldap://10.10.10.182 -x -s base namingcontexts
+
+```
+ldapsearch -H ldap://10.10.10.182 -x -b "DC=cascade,DC=local" '(objectClass=person)'
+```
+
+and we got creds
+
+these were smb creds at we got a lot of files .. one .reg file gave us creds for vnc password
+
+which was cracked as
+
+`echo -n <vnc_pass> | xxd -r -p | openssl enc -des-cbc --nopad --nosalt -K e84ad660c4721ae0 -iv 0000000000000000 -d -provider legacy -provider default | hexdump -Cv`
+
+this was cred for s.smiths accont which gave us user.txt
+
+now looking at net user s.smith
+
+we saw    `Local Group Memberships *Audit Share *IT`
+
+audit share was intresting and can be accessd over smb ..
+
+from smb we found .db ==sqllite3== file and got hash which we decrypted from a exe function from smb file ..
+
+so this was creds for arksvc another account which had elevation over ==recyclebins==
+
+`Get-ADObject -filter 'isDeleted -eq $true -and name -ne "Deleted Objects"' -includeDeletedObjects`
+
+`Get-ADObject -filter { SAMAccountName -eq "TempAdmin" } -includeDeletedObjects -property *`
+
+it gave me admin creds
