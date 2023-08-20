@@ -1,0 +1,5 @@
+mount smb files
+
+sudo mount -t cifs -o vers=1.0 [//10.10.10.134/Backups](//10.10.10.134/Backups) /tmp/
+
+mount -t cifs -o vers=1.0,username=bastion [//10.10.10.134/Backups](//10.10.10.134/Backups) /tmp/  --with user and password
