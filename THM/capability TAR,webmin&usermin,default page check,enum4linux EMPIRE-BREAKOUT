@@ -1,0 +1,17 @@
+port 80 have defaullt apache page ..in source code found creds
+
+now on other port webmin adn usermin were there
+
+did  enum4linuk on ip to get username
+
+now we can spawn terminal from usermin page
+
+check for capabilties and found tar had one
+
+we can read shadow file ..
+
+**./tar -cf password.tar /var/backups/.old_pass.bak**
+
+****tar -xf password.tar****
+
+****or we can search bak file here****
