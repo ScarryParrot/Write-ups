@@ -1,0 +1,25 @@
+it found a ==robots.txt== file cotained db username,password ,adn dbname
+
+and a directory so we had to make make an admin panel using the creds and uplaod a payload to get shell
+
+we got shell and used ==hydra== to crack users password on ssh
+
+now for the root part
+
+it had a file readcreds which read files and a root_backup_file which had root creds ..
+
+so we used
+
+`https://github.com/sroettger/35c3ctf_chals/blob/master/logrotate/exploit/rename.c`
+
+and ==gcc== compiled it in the same directory
+
+now
+
+==touch asd==
+
+==./rename asd root_backup_file==
+
+and it read the file
+
+just like creating a ==symlink== and then reading it
