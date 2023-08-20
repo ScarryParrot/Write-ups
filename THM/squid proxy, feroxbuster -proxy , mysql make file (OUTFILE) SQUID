@@ -3,8 +3,7 @@ https://infosecwriteups.com/proving-grounds-practice-squid-walkthrough-f761d2da9
 
 yep
 
-![ac52872165739e1ae9de2a53cfb3c7f9.png](file:///home/StvRat/.config/joplin-desktop/resources/2765e4fae3b74365a0c158e8b2642aa5.png)
-
+img
 like this then use that proxy to search .. will work
 
 we found phpmyadmin page
@@ -13,12 +12,10 @@ user-root pass- no pass worked we got in
 
 below there was console.. we can write code in php and upload on website
 
-![f115d233c95ca066b87e755f0af46502.png](file:///home/StvRat/.config/joplin-desktop/resources/2ce78aab08654498beac1a485f69aa20.png)
-
+img
 and we got shell
 
-![a3bdaeeea1b9efdadb1bab956a53af2e.png](file:///home/StvRat/.config/joplin-desktop/resources/f972f5968b4846c89747542f8dd63049.png)
-
+img
 upload nc.exe and then connect .
 
 
