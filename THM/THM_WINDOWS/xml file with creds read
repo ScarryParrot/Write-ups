@@ -1,0 +1,3 @@
+$Credential = Import-Clixml -Path ".\lvetrova.xml"
+
+$Credential.GetNetworkCredential().password
