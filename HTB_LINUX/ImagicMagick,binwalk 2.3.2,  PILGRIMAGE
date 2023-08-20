@@ -1,0 +1,27 @@
+on the main page there was a file upload section .. we tried all type of file upload tech but nothing worked
+
+there was .git open so we cloned it and it had a ==magick== file
+
+this pointed to ==imageMagic exploit== .. we did
+
+`./magick -usage` and it gave us the version
+
+we used this to create a file
+
+`https://github.com/Sybil-Scan/imagemagick-lfi-poc`
+
+and uploaded it and curl the resized image by the web application .. it executed the payload
+
+we read /var/www/pil../db file and it had ssh creds
+
+now for root we ran ==pspy== and it showed us the file in ==/usr/sbin==
+
+adn also the cron where to put it
+
+we did ***`binwalk --help`*** and got version
+
+used this to create a png exploit file
+
+`https://github.com/Sybil-Scan/imagemagick-lfi-poc`
+
+and placed it in the directory showed by pspy and got shell
