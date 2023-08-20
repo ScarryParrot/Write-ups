@@ -1,0 +1,7 @@
+on searching sendmail exploit we see every  had calmav in name and 0.91 version rce
+
+so on using it it work but no output
+
+in script it do something on port 31337 /bin/bash
+
+so on doing nc ip 31337 we get /root as shell
