@@ -1,0 +1,5 @@
+sudo useradd -u 3003  -d /dev/shm william
+localhost@localhost:~/Documents/tryhackme/undiscovered$ cat /etc/passwd | grep william
+william:x:3003:3003::/dev/shm:/bin/sh
+sudo su william
+then access it
