@@ -1,0 +1,6 @@
+write a file without open
+
+$ cat > compare.py << EOF
+> import os
+> os.system('/bin/bash')
+> EOF
