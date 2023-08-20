@@ -1,0 +1,15 @@
+redis
+
+redis-cli -h 10.10.190.83 -a "password"
+keys *
+get "filename"
+
+10.10.190.83:6379> GET authlist
+(error) WRONGTYPE Operation against a key holding the wrong kind of value
+10.10.190.83:6379> LRANGE authlist 1 100
+
+1. we can update databse to cahnge out perm to access privleged things
+
+2. read data
+
+3 FOR WINDOWS gre ntlm hash VULNET ACTIVE
