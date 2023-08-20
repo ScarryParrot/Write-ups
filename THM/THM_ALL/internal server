@@ -1,0 +1,41 @@
+port forward
+
+check
+
+ss -ltp
+
+Let’s use SSH port forwarding to connect to this port:
+
+ssh -L <port to visit eg 80 random port>:127.0.0.1:<port where the serve is already running not random> sys-internal@10.10.190.83
+[http://localhost:random port u put](http://localhost:8111) visit
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+edit /etc/proxychains4.conf  socks5 ip port
+
+then ssh into server
+
+ssh -i id_rsa -D 1337 errorcauser@10.10.11.45
+then run rustscan
+
+proxychains nmap -sT 127.0.0.1
+
+-------------------------------------------------------------------------------------
+
+use chisel
+
+on target
+
+./chisel1 client 10.18.4.243:9002 R:22:127.0.0.1:22
+
+on my pc
+
+chisel server --reverse --port 9002
+
+done
+
+or
+
+./chisel client 10.8.0.116:9001 R:127.0.0.1:9002:172.17.0.1:22
+
+/chisel server -p 9001 --reverse   on my pc
