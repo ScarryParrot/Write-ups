@@ -1,0 +1,13 @@
+first we got 2 ports open as http
+
+one port was for MATTERMOST .. this was not vuln to any injections and exploits
+
+so we logged on helpdesk delivery .. where we created account and we got a internal email which we used to log in mattermost which sends
+
+us mail to verify and we can read it from helpdesk ..
+
+and we logged in mattermost
+
+we got shel lfrom creds
+
+and using mysql we got hash and using base64 rule we cracked password
