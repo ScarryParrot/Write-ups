@@ -1,0 +1,27 @@
+there was 2 api that was interacting with server fileRead and dirRead
+
+the source from console said about the payload to pass path = . and we can read files ..
+
+on using ==....//....//....//....//etc/passwd== we can read the file
+
+and got id_rsa
+
+we used the same id_rsa to log in montor .. the other user
+
+it was rbash
+
+so we used
+
+`export PATH=/root/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin`
+
+or
+
+==ssh ss@localhost -t bash==
+
+and got out of rbash
+
+and ran linpeas
+
+it had ==/usr/bin/tac=cap_dac_dir_read_search== highlighed
+
+gtfo bin said and we read root.txt
