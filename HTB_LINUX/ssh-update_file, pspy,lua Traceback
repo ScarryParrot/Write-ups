@@ -1,0 +1,23 @@
+i found a comment which said many hsells here so we looked in git hub and found 16 shells name and on brueforcing we found shell nad got in
+
+now we found a note saying lua script running and in bash history we found command to be executed
+
+we did
+
+`echo 'os.execute("/bin/bash")' > privesc.lua`
+
+teh executed it `sudo -u sysadmin /home/sysadmin/luvit privesc.lua`
+
+and got shell
+
+we ran pspy and found this script running
+
+which was updating the sshd _config
+
+so we
+
+echo 'chmod 777 /etc/passwd' >> 00-header
+
+in the file which was updating in our case it was update_mod.d
+
+and got root
