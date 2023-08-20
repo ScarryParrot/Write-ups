@@ -1,0 +1,7 @@
+if we have code execution so print env
+
+and get the env variables if HOME=/ then we type echo ${HOME}idd     this should give /idd
+
+Sense HTB ippsec vdo
+
+we can use this to cat root.txt if accesible
