@@ -1,0 +1,10 @@
+rsync
+
+rsync --list-only rsync://10.10.190.83
+it will show some file to connect to
+
+rsync --list-only rsync://rsync-connect@10.10.190.83/files
+
+send file
+
+rsync authorized_keys rsync://rsync-connect@10.10.190.83/files/sys-internal/.ssh
