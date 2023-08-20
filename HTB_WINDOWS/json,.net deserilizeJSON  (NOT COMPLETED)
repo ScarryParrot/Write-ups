@@ -1,0 +1,11 @@
+we saw the website on log in we have auth token in base64 format ..another link /api/token uses alos had the token
+
+with bearedr section of base64 data having user,password etc
+
+if we add extra " it says cant ==deserilaize== so we got hint and it was for .net
+
+so we used ==ysoserlize== github to generate a payload and we got a shell
+
+then we used jp.exe to get admin
+
+easy
