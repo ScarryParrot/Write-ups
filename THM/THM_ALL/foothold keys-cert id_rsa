@@ -1,0 +1,5 @@
+foothold keys-cert id_rsa
+
+if u have cert and private key u can login as  or port 54321 try..
+
+openssl s_client -connect b3dr0ck.thm:54321 -cert cert.pem -key key.pem
