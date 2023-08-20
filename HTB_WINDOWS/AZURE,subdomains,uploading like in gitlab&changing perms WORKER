@@ -1,0 +1,39 @@
+
+we got port ==3690== port open .. so we used svn
+
+```
+svn checkout svn://10.129.2.29
+cat moved.txt
+```
+
+we found some ==subdomains== and it lead us to other subdoamins by viewing ==source code==
+
+we did svn ==checkout== and ==diff== and got creds
+
+```
+svn checkout svn://10.129.2.29:3690
+svn diff -r2
+```
+
+one subdomains needs creds and we got in
+
+now in that it was like ==gitlab repos to upload== .. and so we made a  new branch in repo and uploaded aspx file and now we need to merge it to ==master== ..
+
+so we ==created pull  request==
+
+```
+$make a branch (it said we cant upload in master we need to create apull request)
+$upload file sthere
+$create pull request and do Complete not AUTO_COMPLETE
+$now see the name it was asubdomain and we can access it going there
+```
+
+we got shell now root
+
+```
+$using same creds in subdomain we got in the web page now 
+$now we saw pipeline create like in jennekins
+$newpipeline -> Azure repoes g -> PartsUnlimited -> Starter Pipeline 
+$it gave us code and we can remove pool: Default to comile it without permission 
+and add Script: net user Administrator Password@1
+```
