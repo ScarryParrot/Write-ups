@@ -1,0 +1,15 @@
+{
+listUsers
+}
+
+{
+"data": {
+  "listUsers": "['peter', 'jason']"
+}
+}
+
+
+
+{
+getOTP(username:"peter")
+}
