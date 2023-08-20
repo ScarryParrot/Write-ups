@@ -1,0 +1,5 @@
+echo${IFS}test    --   same result as echo test
+
+or
+
+{echo,test}   -- same thing
