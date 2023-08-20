@@ -1,0 +1,28 @@
+on log in ==use domain email== and access the page
+
+otherwise we cant access it portal.php
+
+playing with the parameters we found a error ==XPATH..xml error==
+
+so we found
+
+`')] | //user/*[contains(*,'`
+
+and it gave us ==6 blank fields== so we knew it work but not giving passwords
+
+main idea of this exploit is to get username and passwords
+
+we used ==url converted versino== for it
+
+```
+work=%27)%5D/password%20%7C%20a%5Bcontains(a,%27&action=search 
+```
+
+semi converted .. it only works
+
+for root it was binary exploitation
+
+```
+$ ./get-list
+Which List do you want to open? [customers/employees]: ../../etc/passwd #employees
+```
