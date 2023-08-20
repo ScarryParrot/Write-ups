@@ -1,0 +1,13 @@
+login form said pass should be hash or cracked .. md5 and sha-256 we tried for admin it worked
+
+now there was search button .. /etc/passwd...
+
+```
+/var/lib/php/sessions/sess_<php session id>
+```
+
+we got that file it had a parameter after ;
+
+so we can execute code ..and got shell
+
+esc wa esy
