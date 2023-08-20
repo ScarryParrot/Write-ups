@@ -1,0 +1,21 @@
+we saw a page with ?path=dfdf  so we did a lfi and it worked
+
+we saw the page at 8080 port was sugesting a path `usr/share/tomcat9/etc/tomcat-users.xml`
+
+we got creds now we used metasploit ad got a shell
+
+path i used was not normal ie ==/manager/html==  i used ==/manager/text==
+
+we got a file in /var/www/html and its passwd was new users passwd
+
+it was a ==lxd== account
+
+means we can create a container and dump /root in it
+
+used same command
+
+https://www.hackingarticles.in/lxd-privilege-escalation/
+
+got root
+
+if getting eror read comments
