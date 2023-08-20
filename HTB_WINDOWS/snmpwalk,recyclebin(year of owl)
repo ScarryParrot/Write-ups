@@ -1,0 +1,15 @@
+we got many ports but nothing was there
+
+so we did udp scan and 161 port was open
+
+so ==snmp== walk on default public it was nothing so we did hydra and we got openview and creds
+
+we ==hydra== on rdp and got creds
+
+then we did ==gci -hidden== and saw recyclebin
+
+then we downloaded system.bak nad san.bak
+
+did `secretsdump -ts local -system system.bak -sam sam.bak`
+
+got hash for admin
