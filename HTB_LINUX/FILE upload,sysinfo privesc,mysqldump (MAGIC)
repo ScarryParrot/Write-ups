@@ -1,0 +1,33 @@
+file upload and we have to change the magic numbers ..
+
+we create a file with 16-20 magic number of jpg or png then cat it with our php file then in burp chnage the extension
+
+so
+
+head -c 20 cutie.png > test
+
+==cat== test aa.php > magical.php
+
+done
+
+we got shell from rce
+
+then we used mysqldump as mysql was not available
+
+mysqldump -u theseus -p iamkingtheseus Magic
+
+or can also use --user=  --password=  --host=localhost dbname
+
+then we got user shell from the password
+
+root part
+
+find perm said ==/bin/sysinfo==
+
+==look for ltrace and strace sysinfo==
+
+we found it opens fdisk in dev/shm
+
+so we created file and put rev shell and we got root
+
+on running ==sysinfo==
