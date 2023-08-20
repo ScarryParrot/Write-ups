@@ -1,0 +1,16 @@
+we got a 23 port and then we did udp
+
+on connecting telent on port 25 it needs a pasword
+
+so we did a snmpwalk on port 631 as it was open suggested by hacktricks
+
+```
+snmpwalk -v 2c -c public 10.10.11.107
+snmpwalk -v 2c -c public 10.10.11.107 .1.3.6.1.4.1.11.2.3.9.1.1.13.0
+
+we get hex and it was password
+```
+
+we did exec payload to get shell
+
+then did chisel to get cups a1.6 on out localhost then msfconsole to get root
