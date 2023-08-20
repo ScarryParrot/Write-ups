@@ -1,0 +1,23 @@
+we found the subdomain api
+
+and it had tutorial how to login adn sign in iusing api
+
+we followed it and signed in
+
+on site there was a name James
+
+so we tried bruteforce but no result
+
+we found snmp open so we ran snmpbrute and found internal open
+
+so snmpwalk we got creds for svc
+
+we were in docker
+
+we saw a directory API and i nit we saw a postsql link with ip and port running internally
+
+so we used chisel and connected to it internally
+
+and got svc real creds
+
+now on running linpeas .. we found a file in snmp dir withjames creds and thus root was simple ..
