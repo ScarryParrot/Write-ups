@@ -1,0 +1,14 @@
+look at all clickable sources check for sqli
+
+do again after getting creds on admin page
+
+we found user table with admin pass
+
+Guess user database with all creds
+
+if 22 not open look for /../../etc/knockd.conf
+
+priv esc was easy ..
+
+sudo -l .. dir was given in that dir there was a .py file cat it ..it said all
+look in that directory for py files and it told it all
