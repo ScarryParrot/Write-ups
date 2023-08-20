@@ -1,0 +1,17 @@
+gpg
+
+gpg2john private.asc > pgp.hash
+
+gpg --import private.asc
+
+gpg --decrypt backup.pgp
+
+path2
+
+get the private key BEGIN PRIVATE PGP MESSAGE---
+
+crack it to get paraphrase..
+
+in our case passpie was on host so we did passpie export pass and put the paraphrae and got root pass
+
+https://0xdedinfosec.vercel.app/blog/hackthebox-metatwo-writeup
