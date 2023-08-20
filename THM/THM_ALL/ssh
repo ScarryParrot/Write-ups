@@ -1,0 +1,5 @@
+ssh
+
+we can cp .ssh/id_rsa.pub as authorized_keys
+
+and then send it to victims pc .then we can login ..
