@@ -1,0 +1,3 @@
+$Resp = Invoke-WebRequest 'http://nickel/?whoami' -UseBasicParsing
+
+$Resp.RawContent
