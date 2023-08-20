@@ -1,0 +1,43 @@
+there was creds hard coded on login.html and we got in
+
+but it was of no use
+
+there was a ==subdomain== hms and we can by pass authentication by going to
+
+```
+http://host/openemr/portal/add_edit_event_user.php?eid=1 AND EXTRACTVALUE(0,CONCAT(0x5c,VERSION())) 
+```
+
+it showed a error with a path and it had sql injection  blind
+
+o we got creds from there
+
+for ==openemr== to login in
+
+now we used script from searchsploit ==4517..py== and got shell
+
+it was not working but we can directly ssh to ash with old pasword from login.html
+
+then internally the port ==11211== was open
+
+we did ==telnet== ip port
+
+```
+stats slabs 
+get users   
+get passwd
+ and got password
+```
+
+then ssh into and did id which showed docker
+
+so we did
+
+```
+docker image ls
+we got image 
+then
+
+docker run -v /root/:/mnt -it <image>
+on /mnt we had root.txt
+```
