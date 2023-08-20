@@ -1,0 +1,21 @@
+port 9000 had a script that work .. by hacktricks but we needed a plugin php path in remote host
+
+now the port 80 was open
+
+ran gobuster ..config was there
+
+now run gobuster with fasthits wordlist and we got config.yml
+
+it had the path
+
+now use ==port 80 as WAF== was there
+
+and get shell
+
+for priv esc
+
+/usr/sbin/relayd it can make file readable so
+
+/usr/sbin/relayd -C /etc/shadow
+
+and read it
