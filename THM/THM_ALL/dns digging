@@ -1,0 +1,11 @@
+dns digging
+
+if some ip give reply to specific .com
+
+dig @10.10.20.132 givemetheflag.com A
+
+nslookup -type=A ___.com 10.10.20.132
+
+dig +noall +answer @10.10.11.166 -x 10.10.11.166  -- first this to get doman name then axfr cmd to get sub domains
+
+dig @ip domain type    dig @10.10.164.118 ironcorp.me axfr      axfr gets ips nad subdomains
