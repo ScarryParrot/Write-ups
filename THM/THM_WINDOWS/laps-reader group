@@ -1,0 +1,3 @@
+Get-ADComputer DC01 -property 'ms-mcs-admpwd'
+
+DC01 is pcs name
