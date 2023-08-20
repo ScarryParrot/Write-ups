@@ -1,0 +1,5 @@
+we got creds from source code and used it on website
+
+now on searching we saw cmd input line is commented and is read-only
+
+we uncommented it on burp and removed read-only and got shell tho on id,whomai it showed no output
