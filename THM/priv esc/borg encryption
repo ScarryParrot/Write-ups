@@ -1,0 +1,3 @@
+borg extract final_archive::music_archive
+as the name of the directory which was we know was musoc_archive from web
+borg list final_archive
