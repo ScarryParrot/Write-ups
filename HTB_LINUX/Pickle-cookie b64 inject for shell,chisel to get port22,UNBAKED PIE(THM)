@@ -1,0 +1,17 @@
+pickle exploit code from ~THM and got shell
+
+injected long paykaod in cookie
+
+check the cookie for parameters or check the search bar for writing the paylaod there`
+
+in docker we saw port 22 mentioned in history so used chisel ~THM INTERNAL SERVER
+
+now bruteforce it and got in
+
+import docker .. no relative path vuln
+
+cretae docker.py with paylaod
+
+comand to run
+
+`sudo PYTHONPATH=/dev/shm/ python /opt/dockerScript.py`
