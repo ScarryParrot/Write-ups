@@ -1,0 +1,3 @@
+grep
+
+grep -iR token /TeamCity/logs/ 2>/dev/null to search key word
