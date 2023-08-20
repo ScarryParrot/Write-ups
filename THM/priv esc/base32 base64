@@ -1,0 +1,7 @@
+base32 base64
+
+2 files together
+
+sudo /usr/bin/base64 /root/pass.txt | base64 -d | base32 -d
+
+common sense
