@@ -1,0 +1,17 @@
+we search on google for enterprise thm adn we saw a github repo
+
+on checking history it contained password and username
+
+now we looged in rpcclient and get all usernames
+
+now we did userspn and get hash of a user
+
+winrm was not working so we did  remmnea adn uploaded nc.exe on cmd
+
+then got a shell
+
+on running winpeas it showed unquoted service so we made a exe payload and uploaded
+
+dll hijacking
+
+first stop the service then strat the service to get a shell
