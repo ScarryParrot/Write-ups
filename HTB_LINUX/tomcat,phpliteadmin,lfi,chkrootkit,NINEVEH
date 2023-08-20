@@ -1,0 +1,21 @@
+we ran gobuster and got 2 files db adn departmet
+
+both had a login page
+
+so we did hydra and got password for both
+
+one was phpadminlite . it had exlloits available
+
+we can make a database rev.php like
+
+and call it on the main site and can do exploitation
+
+`https://manuelvazquez-contact.gitbook.io/oscp-prep/hack-the-box/nineveh/exploitation`
+
+best explained
+
+then we get shell and on / we got a afolder which said chkrootkit
+
+`https://tbhaxor.com/exploiting-vulnerable-application-for-privilege-escalation/`
+
+this made me root
